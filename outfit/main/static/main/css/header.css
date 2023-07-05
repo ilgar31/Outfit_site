@@ -1,0 +1,19 @@
+.cap {
+    position: absolute;
+    display: flex;
+    background-color: #C67A30;
+    width: 100%;
+    height: 60px;
+    min-width: 1040px;
+    left: 0;
+    top: 0;
+}
+
+.logo {
+    width: 2.7em;
+    height: 2.7em;
+    border-radius: 50%;
+    background-color: #8B471A;
+    margin-left: 15px;
+    margin-top: 7px;
+}
