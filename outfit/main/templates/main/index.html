@@ -1,6 +1,10 @@
 {% extends 'main/header.html' %}
 {% load static %}
 
+{% block link %}
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/index.css' %}">
+{% endblock %}
+
 {% block title %}
 Главная страница
 {% endblock %}
@@ -8,6 +12,6 @@
 
 {% block content %}
 
-<h1>Игорь красавчик</h1>
+<h1>Наши товары</h1>
 
 {% endblock %}
