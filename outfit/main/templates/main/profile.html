@@ -1,0 +1,22 @@
+{% extends 'main/header.html' %}
+{% load static %}
+
+{% block link %}
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/profile.css' %}">
+{% endblock %}
+
+{% block title %}
+Профиль
+{% endblock %}
+
+
+{% block content %}
+
+<h1>Ваш профиль</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="logout">Выйти</button>
+</form>
+
+{% endblock %}

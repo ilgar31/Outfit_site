@@ -111,3 +111,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '773451768462-fp23pbvof2a825a8pt5i3kaplsoial80.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'

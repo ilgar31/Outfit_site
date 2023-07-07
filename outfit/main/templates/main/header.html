@@ -27,6 +27,13 @@
 <!--        <img src="{% static 'main/png/lupa.png' %}" style="width: 20px; height: 20px; position: relative; top: 8px; left: 5px;" draggable="false">-->
     </div>
 
+    {% if request.user.is_authenticated %}
+
+    <a href="{% url 'home' %}" class="logo"></a>
+    <a href="{% url 'profile' %}" class="profile"><p>{{ request.user.username.0.upper }}</p></a>
+
+    {% else %}
+
     <a class="login_button" href="{% url 'login' %}">
         <p>Войти</p>
     </a>
@@ -34,6 +41,8 @@
     <a class="reg_button" href="{% url 'registration' %}">
         <p>Регистрация</p>
     </a>
+
+    {% endif %}
 
 </div>
 <div class="content">

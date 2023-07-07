@@ -1,11 +1,7 @@
 from django.db import models
 
 
-class Users(models.Model):
-    email = models.CharField("Электронная почта", max_length=50)
-    password = models.CharField("Пароль", max_length=35)
-    login = models.CharField("Логин", max_length=40, default='', blank=True)
-    user_name = models.CharField("Имя", max_length=25, default='', blank=True)
+class Users_data(models.Model):
     user_surname = models.CharField("Фамилия", max_length=25, default='', blank=True)
     img_link = models.URLField("Ссылка на изображение для аватарки", default='', blank=True)
     birthday = models.DateField("День рождения", max_length=25, default='', blank=True)
