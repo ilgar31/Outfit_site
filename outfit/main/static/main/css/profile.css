@@ -1,0 +1,66 @@
+.profile_data {
+    position: absolute;
+    width: 400px;
+    left: 50%;
+    top: 35%;
+    margin: -200px 0 0 -200px;
+}
+
+.user_ava {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    left: 50%;
+    background-color: grey;
+    margin-left: 100px;
+}
+
+.name {
+    position: absolute;
+    top: -131px;
+
+    font-size: 150px;
+    left: 0;
+
+    font-family: Inter, sans-serif;
+}
+
+.change_data {
+    float: right;
+    display: block;
+    width: 150px;
+    height: 25px;
+    border-radius: 5px;
+    background-color: grey;
+    text-align: center;
+    text-decoration: none;
+}
+
+.change_data p {
+    margin-top: 11.5px;
+    color: black;
+    font-family: Inter, sans-serif;
+}
+
+.logout {
+    float: left;
+    display: block;
+    width: 150px;
+    height: 25px;
+    border-radius: 5px;
+    background-color: #grey;
+    text-align: center;
+    text-decoration: none;
+}
+
+.logout p {
+    margin-top: 11.5px;
+    color: black;
+    font-family: Inter, sans-serif;
+}
+
+position: absolute;
+    top: -128px;
+    font-size: 150px;
+    left: 182px;
+    font-family: Inter, sans-serif;

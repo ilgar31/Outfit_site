@@ -44,7 +44,7 @@
 .home_button p {
     margin-top: 11.5px;
     color: white;
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+    font-family: Inter, sans-serif;
 }
 
 .items_button {
@@ -61,7 +61,7 @@
 .items_button p {
     margin-top: 11.5px;
     color: white;
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+    font-family: Inter, sans-serif;
 }
 
 .login_button {
@@ -78,7 +78,7 @@
 .login_button p {
     margin-top: 11.5px;
     color: white;
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+    font-family: Inter, sans-serif;
 }
 
 .reg_button {
@@ -96,7 +96,7 @@
 .reg_button p {
     margin-top: 11.5px;
     color: black;
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+    font-family: Inter, sans-serif;
 }
 
 
@@ -141,7 +141,7 @@
     text-decoration: none;
     color: white;
     font-size: 17px;
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+    font-family: Inter, sans-serif;
 }
 
 .profile p {
