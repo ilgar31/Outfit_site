@@ -12,16 +12,15 @@
 
 {% block content %}
 
-<div class='profile_data'>
-    <div class="user_ava"><p class="name">{{ request.user.username.0.upper }}</p></div>
-    <div class="extra_data">
-        <form method="post">
-        {% csrf_token %}
-        <button type="submit" class="logout"><p>Выйти</p></button>
-        </form>
-        <a href="{% url 'home' %}" class="change_data"><p>Изменить данные</p></a>
-    </div>
+<div class="user_ava"><p class="name">{{ request.user.username.0.upper }}</p></div>
+<div class="extra_data">
+    <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="logout"><p>Выйти</p></button>
+    </form>
+    <a href="{% url 'home' %}" class="change_data"><p>Изменить профиль</p></a>
 </div>
+
 
 
 {% endblock %}
