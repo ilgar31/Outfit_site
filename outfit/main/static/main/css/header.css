@@ -1,9 +1,7 @@
 .content {
-    position: fixed;
+    position: absolute;
     top:0;
     left:0;
-    border: solid #E49445;
-    border-width: 70px 10px 10px 10px;
     width: 100%;
     height: 100%;
     box-sizing: border-box;
@@ -13,6 +11,8 @@
     position: absolute;
     display: flex;
     background-color: #C67A30;
+    border: solid #E49445;
+    border-width: 0 0 10px 0 ;
     width: 100%;
     height: 60px;
     min-width: 1040px;
