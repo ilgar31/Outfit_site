@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from .models import Profile
 from django.forms import ModelForm, CharField, PasswordInput, TextInput, EmailInput
 
 
@@ -11,3 +12,10 @@ class UserRegistrationForm(ModelForm):
         widgets = {
             'username': EmailInput(attrs={'placeholder': 'Введите адрес электронной почты', "style": "padding-left: 10px; font-size: 16px;"}),
         }
+
+
+class ProfileForm(ModelForm):
+    class Meta:
+        model = Profile
+        fields = {"img", "user_name", "user_surname", "birthday", "gender", "country"}
+

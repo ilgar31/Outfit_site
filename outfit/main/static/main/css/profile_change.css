@@ -1,7 +1,48 @@
-h1 {
-    font-size: 35px;
+.select_box {
     position: absolute;
-    text-align: center;
-    margin-block-start: 100px;
-    left: 50px;
+    width: 250px;
+    height: 400px;
+    top: 25%;
+    left: 30px;
+    margin: 80px 0 0 0  ;
+}
+
+.select_item {
+    background-color: #D9D9D9;
+    border-radius: 15px;
+    padding: 15px 10px 15px 10px;
+    margin-top: 30px;
+    border: 0px solid;
+    font-size: 17px;
+    cursor:pointer;
+    font-family: Inter, sans-serif;
+}
+
+.select_item:hover {
+    background-color: #cfcece;
+}
+
+.item {
+    border: 0px solid;
+    min-width: 211px;
+    text-align: left;
+    background-color: white;
+    border-radius: 15px;
+    padding: 15px 10px 15px 10px;
+    margin-top: 30px;
+    font-size: 17px;
+    cursor:pointer;
+    font-family: Inter, sans-serif;
+}
+
+.item:hover {
+    background-color: #E8E8E8;
+}
+
+.change_data{
+    position: absolute;
+    left: 350px;
+    top: 10%;
+    margin: 80px 0 0 0;
+
 }

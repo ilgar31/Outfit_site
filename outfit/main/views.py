@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import UserRegistrationForm
+from .forms import UserRegistrationForm, ProfileForm
 from django.contrib.auth import authenticate, login, logout
 
 
@@ -46,5 +46,13 @@ def profile(request):
 
 
 def profile_change(request):
-    return render(request, "main/profile_change.html")
+    if request.method == 'POST':
+        profile_form = ProfileForm(request.POST)
+        if profile_form.is_valid():
+            new_user = profile_form.save(commit=False)
+            new_user.save()
+            return render(request, 'main/profile.html')
+    else:
+        profile_form = ProfileForm()
+    return render(request, "main/profile_change.html", {"profile_form": profile_form})
 

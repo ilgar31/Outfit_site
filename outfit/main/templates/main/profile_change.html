@@ -12,6 +12,39 @@
 
 {% block content %}
 
-<h1>Редактирование данных</h1>
+<div class="select_box">
+    <button href="{% url 'profile_change' %}" class="select_item">Персональные данные</button>
+    <button href="{% url 'profile_change' %}" class="item">Настройка ленты</button>
+    <button href="{% url 'profile_change' %}" class="item">Уведомления</button>
+    <button href="{% url 'profile_change' %}" class="item">Конфиденциальность</button>
+    <button href="{% url 'profile_change' %}" class="item">Безопасность входа</button>
+</div>
+<div class="change_data">
+    <h1 class="data_message">Персональные данные</h1>
+    <p class="form_info">Отредактируйте основные личные сведения, чтобы улучшить рекомендации.</p>
+    <form method="post">
+        {% csrf_token %}
+
+        <p class="form_name"></p>
+        <div class="profile_img"></div>
+        <div class="change_img">{{ profile_form.img }}</div>
+
+        <p class="form_name"></p>
+        <div class="change_name">{{ profile_form.user_name }}</div>
+
+        <p class="form_name"></p>
+        <div class="change_surname">{{ profile_form.user_surname }}</div>
+
+        <p class="form_name"></p>
+        <div class="change_birthday">{{ profile_form.birthday }}</div>
+
+        <p class="form_name"></p>
+        <div class="change_gender">{{ profile_form.gender }}</div>
+
+        <p class="form_name"></p>
+        <div class="change_country">{{ profile_form.country }}</div>
+
+    </form>
+</div>
 
 {% endblock %}

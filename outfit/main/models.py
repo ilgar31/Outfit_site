@@ -14,15 +14,11 @@ class Profile(models.Model):
     user_surname = models.CharField("Фамилия", max_length=25, blank=True)
     img = models.FileField("Фотография", upload_to=png_save, blank=True)
     birthday = models.DateField("День рождения", null=True, blank=True)
-    gender = models.BooleanField('Пол', default=0, max_length=20, blank=True)
+    GENDER_CHOICES = (('M', 'Мужской'), ('F', 'Женский'))
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, blank=True)
     country = models.CharField("Город", max_length=40, blank=True)
 
     def __str__(self):
-        if self.user_name:
-            if self.user_surname:
-                return f"{self.user_name} {self.user_surname}"
-            else:
-                return f"{self.user_name}"
         return self.user.username
 
     class Meta:
