@@ -35,6 +35,10 @@
     margin-top: 5px;
 }
 
+.registration_box input:hover {
+    background-color: #f8f8f8;
+}
+
 .input_name {
     font-family: Inter, sans-serif;
     margin-block-end: 0em;
@@ -53,6 +57,10 @@
     font-family: Inter, sans-serif;
     font-size: 15px;
     cursor:pointer;
+}
+
+.continue_button:hover {
+    background-color: #3f3e3e;
 }
 
 .info {
