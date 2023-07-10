@@ -25,25 +25,26 @@
     <form method="post">
         {% csrf_token %}
 
-        <p class="form_name"></p>
+        <p class="form_name" style="margin-top:40px;">Фотография</p>
         <div class="profile_img"></div>
-        <div class="change_img">{{ profile_form.img }}</div>
+        {{ profile_form.img }}
 
-        <p class="form_name"></p>
-        <div class="change_name">{{ profile_form.user_name }}</div>
+        <p class="form_name">Имя</p>
+        {{ profile_form.user_name }}
 
-        <p class="form_name"></p>
-        <div class="change_surname">{{ profile_form.user_surname }}</div>
+        <p class="form_name">Фамилия</p>
+        {{ profile_form.user_surname }}
 
-        <p class="form_name"></p>
-        <div class="change_birthday">{{ profile_form.birthday }}</div>
+        <p class="form_name">Дата рождения</p>
+        {{ profile_form.birthday }}
 
-        <p class="form_name"></p>
-        <div class="change_gender">{{ profile_form.gender }}</div>
+        <p class="form_name">Пол</p>
+        {{ profile_form.gender }}
 
-        <p class="form_name"></p>
-        <div class="change_country">{{ profile_form.country }}</div>
+        <p class="form_name">Город</p>
+        {{ profile_form.country }}
 
+        <button type="submit" class="save_button">Сохранить</button>
     </form>
 </div>
 
