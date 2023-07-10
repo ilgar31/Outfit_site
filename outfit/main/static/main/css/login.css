@@ -2,11 +2,11 @@
     position: absolute;
     height: 600px;
     width: 400px;
-    top: 20%;
+    top: 13%;
     left: 50%;
     margin: 80px 0 80px -220px;
     border-radius: 40px;
-    border: 20px solid #FCC793;
+    border: 20px solid #E8E8E8;
     text-align: center;
 }
 
@@ -14,7 +14,7 @@
     width: 2.7em;
     height: 2.7em;
     border-radius: 50%;
-    background-color: #8B471A;
+    background-color: #515050;
     margin: auto;
     margin-top: 30px;
     margin-block-end: 2em;
@@ -30,7 +30,7 @@
 .login_box input{
     width: 300px;
     height: 40px;
-    border: 5px solid #FCC793;
+    border: 5px solid #E8E8E8;
     border-radius: 15px;
     margin-top: 5px;
     padding-left: 10px;
@@ -47,7 +47,7 @@
     width: 200px;
     height: 30px;
     border-radius: 15px;
-    background-color: #8B471A;
+    background-color: #515050;
     border: 0px;
     margin-top: 15px;
     color: white;

@@ -10,8 +10,8 @@
 .cap {
     position: absolute;
     display: flex;
-    background-color: #C67A30;
-    border: solid #E49445;
+    background-color: white;
+    border: solid white;
     border-width: 0 0 10px 0 ;
     width: 100%;
     height: 60px;
@@ -25,16 +25,26 @@
     min-width: 2.7em;
     height: 2.7em;
     border-radius: 50%;
-    background-color: #8B471A;
+    background-color: #515050;
     margin-left: 15px;
     margin-top: 7px;
 }
+
+.box {
+    min-width: 2.7em;
+    height: 2.7em;
+    border-radius: 50%;
+    background-color: #E8E8E8;
+    margin-left: 15px;
+    margin-top: 7px;
+}
+
 
 .home_button {
     min-width: 6em;
     height: 2.7em;
     border-radius: 25px;
-    background-color: #533F3C;
+    background-color: white;
     margin-left: 15px;
     margin-top: 7px;
     text-align: center;
@@ -43,7 +53,7 @@
 
 .home_button p {
     margin-top: 11.5px;
-    color: white;
+    color: black;
     font-family: Inter, sans-serif;
 }
 
@@ -51,7 +61,7 @@
     min-width: 6em;
     height: 2.7em;
     border-radius: 25px;
-    background-color: #854C13;
+    background-color: white;
     margin-left: 15px;
     margin-top: 7px;
     text-align: center;
@@ -60,7 +70,7 @@
 
 .items_button p {
     margin-top: 11.5px;
-    color: white;
+    color: black;
     font-family: Inter, sans-serif;
 }
 
@@ -68,7 +78,7 @@
     min-width: 8.8em;
     height: 2.7em;
     border-radius: 25px;
-    background-color: #854C13;
+    background-color: #515050;
     margin-left: 20px;
     margin-top: 7px;
     text-align: center;
@@ -85,7 +95,7 @@
     min-width: 8.8em;
     height: 40px;
     border-radius: 25px;
-    background-color: #ECBD8E;
+    background-color: #E8E8E8;
     margin-left: 15px;
     margin-top: 7px;
     text-align: center;
@@ -94,7 +104,7 @@
 }
 
 .reg_button p {
-    margin-top: 11.5px;
+    margin-top: 10px;
     color: black;
     font-family: Inter, sans-serif;
 }
@@ -115,7 +125,7 @@
     width: 100%;
     height: 40.5px;
     border-radius: 25px;
-    background-color: #E9CFB6;
+    background-color: #E8E8E8;
     border: 0px;
     outline: none;
     font-size: 18px;
@@ -133,13 +143,13 @@
     min-width: 2.7em;
     height: 2.7em;
     border-radius: 50%;
-    background-color: #8B471A;
+    background-color: #E8E8E8;
     margin-left: 15px;
     margin-top: 7px;
     margin-right: 15px;
     text-align: center;
     text-decoration: none;
-    color: white;
+    color: black;
     font-size: 17px;
     font-family: Inter, sans-serif;
 }

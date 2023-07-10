@@ -43,3 +43,8 @@ def profile(request):
         logout(request)
         return redirect("home")
     return render(request, "main/profile.html")
+
+
+def profile_change(request):
+    return render(request, "main/profile_change.html")
+
