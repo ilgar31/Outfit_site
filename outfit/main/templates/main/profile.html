@@ -12,7 +12,16 @@
 
 {% block content %}
 
+{% if request.user.profile.img %}
+
+<img src="{% static request.user.profile.img %}" class="user_ava" draggable="false">
+
+{% else %}
+
 <div class="user_ava"><p class="name">{{ request.user.username.0.upper }}</p></div>
+
+{% endif %}
+
 <div class="extra_data">
     <form method="post">
     {% csrf_token %}

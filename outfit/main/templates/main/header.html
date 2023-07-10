@@ -32,7 +32,16 @@
     {% if request.user.is_authenticated %}
 
     <a href="{% url 'home' %}" class="box"></a>
+
+    {% if request.user.profile.img %}
+
+    <a href="{% url 'profile' %}"><img src="{% static request.user.profile.img %}" class="user_img" draggable="false"></a>
+
+    {% else %}
+
     <a href="{% url 'profile' %}" class="profile"><p>{{ request.user.username.0.upper }}</p></a>
+
+    {% endif %}
 
     {% else %}
 

@@ -26,7 +26,16 @@
         {% csrf_token %}
 
         <p class="form_name" style="margin-top:40px;">Фотография</p>
-        <div class="profile_img"></div>
+        {% if request.user.profile.img %}
+
+        <img src="{% static request.user.profile.img %}" class="user_foto" draggable="false">
+
+        {% else %}
+
+        <div class="user_foto"><p class="name">{{ request.user.username.0.upper }}</p></div>
+
+        {% endif %}
+
         {{ profile_form.img }}
 
         <p class="form_name">Имя</p>

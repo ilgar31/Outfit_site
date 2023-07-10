@@ -127,3 +127,16 @@
     border: 2px solid #cfcfcf;
     background-color: #cdcdcd;
 }
+
+.change_img {
+/*    color: transparent;*/
+}
+
+.user_foto {
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+

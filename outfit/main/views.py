@@ -56,7 +56,10 @@ def profile_change(request):
             profile_obj.gender = profile_form['gender'].value()
             profile_obj.birthday = profile_form['birthday'].value()
             profile_obj.country = profile_form['country'].value()
-            profile_obj.img = request.FILES['img']
+            try:
+                profile_obj.img = request.FILES['img']
+            except:
+                pass
 
             profile_obj.save()
             return render(request, 'main/profile.html')

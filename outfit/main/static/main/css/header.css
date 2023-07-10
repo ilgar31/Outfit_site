@@ -177,3 +177,15 @@
 .profile p {
     margin-top: 11.5px;
 }
+
+.user_img {
+    border-radius: 50%;
+    width: 43px;
+    height: 43px;
+    margin-left: 15px;
+    margin-top: 7px;
+    margin-right: 15px;
+}
+
+
+
