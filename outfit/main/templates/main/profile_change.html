@@ -22,7 +22,7 @@
 <div class="change_data">
     <h1 class="data_message">Персональные данные</h1>
     <p class="form_info">Отредактируйте основные личные сведения, чтобы улучшить рекомендации.</p>
-    <form method="post">
+    <form method="post" enctype= multipart/form-data>
         {% csrf_token %}
 
         <p class="form_name" style="margin-top:40px;">Фотография</p>

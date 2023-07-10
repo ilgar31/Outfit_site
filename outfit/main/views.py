@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import UserRegistrationForm, ProfileForm
 from django.contrib.auth import authenticate, login, logout
+from django.forms import TextInput
 
 
 def index(request):
@@ -47,12 +48,27 @@ def profile(request):
 
 def profile_change(request):
     if request.method == 'POST':
-        profile_form = ProfileForm(request.POST)
+        profile_form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
         if profile_form.is_valid():
-            new_user = profile_form.save(commit=False)
-            new_user.save()
+            profile_obj = request.user.profile
+            profile_obj.user_name = profile_form['user_name'].value()
+            profile_obj.user_surname = profile_form['user_surname'].value()
+            profile_obj.gender = profile_form['gender'].value()
+            profile_obj.birthday = profile_form['birthday'].value()
+            profile_obj.country = profile_form['country'].value()
+            profile_obj.img = request.FILES['img']
+
+            profile_obj.save()
             return render(request, 'main/profile.html')
+        else:
+            print("no")
     else:
         profile_form = ProfileForm()
+        profile_form.fields["user_name"].initial = request.user.profile.user_name
+        profile_form.fields["user_surname"].initial = request.user.profile.user_surname
+        profile_form.fields["gender"].initial = request.user.profile.gender
+        profile_form.fields["birthday"].initial = request.user.profile.birthday
+        profile_form.fields["country"].initial = request.user.profile.country
+
     return render(request, "main/profile_change.html", {"profile_form": profile_form})
 
