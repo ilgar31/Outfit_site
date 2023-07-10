@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from .models import Profile
-from django.forms import ModelForm, CharField, PasswordInput, TextInput, EmailInput, DateInput, FileInput, TextInput
+from django.forms import ModelForm, CharField, PasswordInput, TextInput, EmailInput, DateInput, FileInput, TextInput, RadioSelect, ChoiceField
 
 
 class UserRegistrationForm(ModelForm):
@@ -15,15 +15,16 @@ class UserRegistrationForm(ModelForm):
 
 
 class ProfileForm(ModelForm):
+    gender = ChoiceField(widget=RadioSelect(attrs={'style': 'font-family: Inter, sans-serif;'}), choices=Profile.GENDER_CHOICES)
+
     class Meta:
         model = Profile
-        fields = {"img", "user_name", "user_surname", "birthday", "gender", "country"}
+        fields = {"img", "user_name", "user_surname", "birthday", "country"}
         widgets = {
             "img": FileInput(attrs={'class': 'change_img'}),
             "user_name": TextInput(attrs={'class': 'change_name'}),
             "user_surname": TextInput(attrs={'class': 'change_surname'}),
             "birthday": DateInput(attrs={'type': 'date', 'class': 'change_birthday'}),
-            "gender": TextInput(attrs={'class': 'change_gender'}),
             "country": TextInput(attrs={'class': 'change_country'}),
         }
 

@@ -39,10 +39,16 @@
         {{ profile_form.birthday }}
 
         <p class="form_name">Пол</p>
-        {{ profile_form.gender }}
+        {% for gender in profile_form.gender %}
+            {{ gender.tag }}
+        <label for="{{ gender.id_for_label }}" style="font-family: Inter, sans-serif;">
+            {{ gender.choice_label }}
+        </label>
+        {% endfor %}
 
         <p class="form_name">Город</p>
         {{ profile_form.country }}
+        <br>
 
         <button type="submit" class="save_button">Сохранить</button>
     </form>

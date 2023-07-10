@@ -98,16 +98,6 @@
     font-family: Inter, sans-serif;
 }
 
-.change_gender {
-    width: 250px;
-    height: 30px;
-    border-radius: 13px;
-    border: 2px solid;
-    border-color: #D9D9D9;
-    padding-left: 10px;
-    font-family: Inter, sans-serif;
-}
-
 .change_country {
     width: 250px;
     height: 30px;
@@ -120,4 +110,20 @@
 
 
 .save_button {
+    margin-top: 100px;
+    width: 170px;
+    height: 45px;
+    border-radius: 25px;
+    background-color: #d9d9d9;
+    text-align: center;
+    cursor: pointer;
+    color: black;
+    font-family: Inter, sans-serif;
+    font-size: 17px;
+    border: 0;
+}
+
+.save_button:hover {
+    border: 2px solid #cfcfcf;
+    background-color: #cdcdcd;
 }
