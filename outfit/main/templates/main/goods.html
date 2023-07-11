@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block link %}
-<link rel="stylesheet" type="text/css" href="{% static 'main/css/index.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/goods.css' %}">
 {% endblock %}
 
 {% block title %}
@@ -12,6 +12,17 @@
 
 {% block content %}
 
-<h1>Наши товары</h1>
+<div class="items_box">
+    <items>
+        {% for i in items %}
+        <a href="{% url 'product_page' i.id %}">
+            <div class="item_box">
+                <p class="item_name">{{ i.name }}</p>
+            </div>
+        </a>
+        {% endfor %}
+    </items>
+</div>
 
 {% endblock %}
+

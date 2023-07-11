@@ -1,0 +1,37 @@
+.items_box{
+    position: absolute;
+    top: 2%;
+    padding: 80px 50px 40px 50px;
+}
+
+items {
+    position: relative;
+    width: 250px;
+    height: 220px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-gap: 2vw;
+}
+
+.item_box {
+    width: 250px;
+    height: 350px;
+    box-shadow: 3px 3px 10px grey;
+    background: white;
+    font-size: 5vw;
+    padding: .5em;
+    border-radius: 15px;
+    text-align: center;
+    align-items: center;
+    transition: 0.2s;
+}
+
+.шitem_box:hover{
+    width: 300px;
+    height: 440px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+
+

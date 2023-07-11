@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import UserRegistrationForm, ProfileForm
 from django.contrib.auth import authenticate, login, logout
 from django.forms import TextInput
+from .models import Items
 
 
 def index(request):
@@ -9,7 +10,8 @@ def index(request):
 
 
 def goods(request):
-    return render(request, "main/goods.html")
+    items = Items.objects.all()
+    return render(request, "main/goods.html", {"items": items})
 
 
 def registration(request):
@@ -74,4 +76,8 @@ def profile_change(request):
         profile_form.fields["country"].initial = request.user.profile.country
 
     return render(request, "main/profile_change.html", {"profile_form": profile_form})
+
+
+def product_page(request, pk):
+    return render(request, "main/product_page.html")
 
