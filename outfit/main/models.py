@@ -8,6 +8,10 @@ def png_save(instance, filename):
     return f'main/png/users/user_{instance.id} ({instance.user.username})/{filename}'
 
 
+def img_save(instance, filename):
+    return f'main/png/items/item_{instance.item.id}/{filename}'
+
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     user_name = models.CharField("Имя", max_length=25, blank=True)
@@ -55,3 +59,7 @@ class Items(models.Model):
         verbose_name = "Товар"
         verbose_name_plural = "Товары"
 
+
+class Item_images(models.Model):
+    item = models.ForeignKey(Items, on_delete=models.CASCADE, related_name="images")
+    image = models.ImageField(upload_to=img_save)
