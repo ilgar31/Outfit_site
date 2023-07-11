@@ -62,7 +62,7 @@ def profile_change(request):
                 pass
 
             profile_obj.save()
-            return render(request, 'main/profile.html')
+            return redirect("profile")
         else:
             print("no")
     else:

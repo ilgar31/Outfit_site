@@ -36,3 +36,22 @@ def create_user_profile(sender, instance, created, **kwargs):
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
 
+
+class Items(models.Model):
+    name = models.CharField("Имя товара", max_length=45, blank=True)
+    type = models.CharField("Тип", max_length=35, blank=True)
+    size = models.CharField("Доступные размеры", max_length=35, blank=True)
+    cost = models.IntegerField("Стоимость", blank=True)
+    GENDER_CHOICES = (('M', 'Мужской'), ('F', 'Женский'))
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, blank=True)
+    brand = models.CharField("Бренд", max_length=40, blank=True)
+    color = models.CharField("Цвет", max_length=20, blank=True)
+    description = models.TextField("Описание", blank=True)
+
+    def __str__(self):
+        return f'{self.name} ({self.color})'
+
+    class Meta:
+        verbose_name = "Товар"
+        verbose_name_plural = "Товары"
+
