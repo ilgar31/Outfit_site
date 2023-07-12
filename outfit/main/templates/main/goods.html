@@ -15,10 +15,10 @@
 <div class="items_box">
     <items>
         {% for i in items %}
-        <a href="{% url 'product_page' i.id %}">
-            <div class="item_box">
-                <p class="item_name">{{ i.name }}</p>
-            </div>
+        <a href="{% url 'product_page' i.id %}" class="item_box">
+            <img src="{% static i.images.all.0 %}" class="item_img" draggable="false">
+            <p class="item_name">{{ i.name }}</p>
+            <p class="item_price">{{ i.cost }}р</p>
         </a>
         {% endfor %}
     </items>

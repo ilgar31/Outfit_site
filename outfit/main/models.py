@@ -63,3 +63,6 @@ class Items(models.Model):
 class Item_images(models.Model):
     item = models.ForeignKey(Items, on_delete=models.CASCADE, related_name="images")
     image = models.ImageField(upload_to=img_save)
+
+    def __str__(self):
+        return f'{self.image}'
