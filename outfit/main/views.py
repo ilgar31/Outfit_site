@@ -79,5 +79,6 @@ def profile_change(request):
 
 
 def product_page(request, pk):
-    return render(request, "main/product_page.html")
+    item = Items.objects.get(id=pk)
+    return render(request, "main/product_page.html", {"item": item})
 

@@ -12,6 +12,9 @@
 
 {% block content %}
 
-<h1>Наши товары</h1>
+<div class="item_box">
+    <div class="item_name"><p style="margin-top:10px;">{{ item.name }}</p></div>
+    <img src="{% static i.images.all.0 %}" class="item_img" draggable="false">
+</div>
 
 {% endblock %}
