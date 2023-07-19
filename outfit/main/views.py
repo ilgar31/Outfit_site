@@ -3,6 +3,8 @@ from .forms import UserRegistrationForm, ProfileForm
 from django.contrib.auth import authenticate, login, logout
 from django.forms import TextInput
 from .models import Items
+from django.http import JsonResponse
+import json
 
 
 def index(request):
@@ -81,4 +83,26 @@ def profile_change(request):
 def product_page(request, pk):
     item = Items.objects.get(id=pk)
     return render(request, "main/product_page.html", {"item": item})
+
+
+def search_results(request):
+    if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+        item = request.POST.get('item')
+        search_items = Items.objects.filter(name__icontains=item)
+        if len(search_items) > 0 and len(item.replace(" ", '')) > 0:
+            data = []
+            for i in search_items:
+                element = {
+                    'pk': i.pk,
+                    'name': i.name,
+                    'color': i.color,
+                    'image': 'static/' + str(i.images.all()[0]),
+                    'url': "product/" + str(i.pk)
+                }
+                data.append(element)
+            res = data
+        else:
+            res = "Товар не найден"
+        return JsonResponse({"item": res})
+    return JsonResponse({})
 

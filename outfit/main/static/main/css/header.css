@@ -189,5 +189,58 @@
     background-color: #ededed;
 }
 
+.result_card {
+    background: #E8E8E8;
+    width: 100%;
+    padding: 10px 10px 10px 10px;;
+    margin-top:5px;
+    border-radius: 20px;
+    min-height: 50px;
+}
 
+.not-visible {
+    display: none;
+}
+
+.item_in_search {
+    text-decoration: none;
+    color: black;
+    font-family: Inter, sans-serif;
+}
+
+.item_img_search {
+    height: 85px;
+    border-radius: 10px;
+    position: absolute;
+    margin-top: 7.5px;
+    margin-left: 20px;
+}
+
+.name_item_search {
+    FONT-WEIGHT: 500;
+    position: absolute;
+    margin-top: 45px;
+    margin-left: 250px;
+    font-size: 22px;
+}
+
+.item_box_search {
+    width: 100%;
+    margin-top: 5px;
+    height: 100px;
+    border-radius: 15px;
+    background-color: #b7b7b7;
+    border: 0px;
+    font-size: 18px;
+    line-height:20px;
+}
+
+d {
+    font-family: Inter, sans-serif;
+    FONT-WEIGHT: 500;
+    position: absolute;
+    margin-top: 10px;
+    margin-left: 30px;
+    font-size: 22px;
+}
 

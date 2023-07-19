@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     <link rel="stylesheet" type="text/css" href="{% static 'main/css/header.css' %}">
     {% block link %}{% endblock %}
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="{% static 'main/js/search.js' %}" defer></script>
+    {% block script %}{% endblock %}
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
@@ -25,8 +28,11 @@
     </a>
 
     <div class="search_box">
-        <input class="search_box_input" placeholder="Найти..." type="text">
-<!--        <img src="{% static 'main/png/lupa.png' %}" style="width: 20px; height: 20px; position: relative; top: 8px; left: 5px;" draggable="false">-->
+        <form id="search_form">
+            {% csrf_token %}
+            <input id="search_input" class="search_box_input" placeholder="Найти..." type="text">
+        </form>
+        <div id="results_box" class="result_card not-visible"></div>
     </div>
 
     {% if request.user.is_authenticated %}
