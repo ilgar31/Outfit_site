@@ -128,9 +128,6 @@
     background-color: #cdcdcd;
 }
 
-.change_img {
-/*    color: transparent;*/
-}
 
 .user_foto {
     border-radius: 50%;
@@ -138,7 +135,21 @@
     height: 55px;
     margin-left: 10px;
     margin-right: 10px;
-    object-fit: contain;
+    object-fit: cover;
     background-color: #ededed;
+}
+
+.name {
+    font-family: Inter, sans-serif;
+    text-align: center;
+    font-size: 29px;
+    margin-block-start: 0;
+    padding-top: 9px;
+}
+
+.change_img {
+    margin-top: 10px;
+    font-family: Inter, sans-serif;
+    color: white;
 }
 

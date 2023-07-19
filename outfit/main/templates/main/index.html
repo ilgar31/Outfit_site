@@ -12,6 +12,14 @@
 
 {% block content %}
 
-<h1>Наши аутфиты</h1>
-
+<div class="container">
+    <div class="block">
+        <img src="{% static 'main/png/outfits.png' %}" class="outfits_img" draggable="false">
+        <a href="{% url 'goods' %}" class="change_button"><div class="button_div"><p>Аутфиты</p></div></a>
+    </div>
+    <div class="block">
+        <img src="{% static 'main/png/goods.png' %}" class="goods_img" draggable="false">
+        <a href="{% url 'goods' %}" class="change_button"><div class="button_div"><p>Товары</p></div></a>
+    </div>
+</div>
 {% endblock %}
