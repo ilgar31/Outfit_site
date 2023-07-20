@@ -66,3 +66,15 @@ class Item_images(models.Model):
 
     def __str__(self):
         return f'{self.image}'
+
+
+class Favorites(models.Model):
+    id_user = models.IntegerField("ID пользователя", blank=True)
+    id_item = models.IntegerField("ID товара", blank=True)
+
+    def __str__(self):
+        return f"{self.id_user} -> {self.id_item}"
+
+    class Meta:
+        verbose_name = "Избранное"
+        verbose_name_plural = "Избранное"

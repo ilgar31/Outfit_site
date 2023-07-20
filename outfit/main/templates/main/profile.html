@@ -30,6 +30,19 @@
     <a href="{% url 'profile_change' %}" class="change_data"><p>Изменить профиль</p></a>
 </div>
 
+<div class="user_items">
+    <button class="items_far"><p>Избранное</p></button>
+    <button class="items_pur"><p>Купленное</p></button>
+</div>
 
+<div class="favorites">
+    {% for i in favorites_items %}
+        <a href="{% url 'product_page' i.id %}" class="item_box">
+            <img src="{% static i.images.all.0 %}" class="item_img" draggable="false">
+            <p class="item_name">{{ i.name }}</p>
+            <p class="item_price">{{ i.cost }} руб</p>
+        </a>
+    {% endfor %}
+</div>
 
 {% endblock %}

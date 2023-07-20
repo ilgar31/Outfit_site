@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import UserRegistrationForm, ProfileForm
 from django.contrib.auth import authenticate, login, logout
 from django.forms import TextInput
-from .models import Items
+from .models import Items, Favorites
 from django.http import JsonResponse
 import json
 
@@ -44,10 +44,14 @@ def login_page(request):
 
 
 def profile(request):
+    favorites = Favorites.objects.filter(id_user=request.user.id)
+    favorites_items = []
+    for item in favorites:
+        favorites_items.extend(Items.objects.filter(id=item.id_item))
     if request.method == "POST":
         logout(request)
         return redirect("home")
-    return render(request, "main/profile.html")
+    return render(request, "main/profile.html", {"favorites_items": favorites_items})
 
 
 def profile_change(request):
@@ -94,7 +98,10 @@ def beautiful_price(number):
 def product_page(request, pk):
     item = Items.objects.get(id=pk)
     item.cost = beautiful_price(item.cost)
-    return render(request, "main/product_page.html", {"item": item, "images_count": range(len(item.images.all()))})
+    in_favorites = False
+    if Favorites.objects.filter(id_user=request.user.id, id_item=pk):
+        in_favorites = True
+    return render(request, "main/product_page.html", {"item": item, "images_count": range(len(item.images.all())), "in_favorites": in_favorites})
 
 
 def search_results(request):
