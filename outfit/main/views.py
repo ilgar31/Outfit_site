@@ -80,9 +80,21 @@ def profile_change(request):
     return render(request, "main/profile_change.html", {"profile_form": profile_form})
 
 
+def beautiful_price(number):
+    cnt = 0
+    new_price = ''
+    for c in str(number)[::-1]:
+        new_price += c
+        cnt += 1
+        if cnt % 3 == 0:
+            new_price += ' '
+    return new_price[::-1]
+
+
 def product_page(request, pk):
     item = Items.objects.get(id=pk)
-    return render(request, "main/product_page.html", {"item": item})
+    item.cost = beautiful_price(item.cost)
+    return render(request, "main/product_page.html", {"item": item, "images_count": range(len(item.images.all()))})
 
 
 def search_results(request):

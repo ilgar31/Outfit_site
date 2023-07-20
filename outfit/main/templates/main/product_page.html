@@ -5,6 +5,10 @@
 <link rel="stylesheet" type="text/css" href="{% static 'main/css/product_page.css' %}">
 {% endblock %}
 
+{% block script %}
+<script src="{% static 'main/js/product_page.js' %}" defer></script>
+{% endblock %}
+
 {% block title %}
 Главная страница
 {% endblock %}
@@ -14,7 +18,28 @@
 
 <div class="item_box">
     <div class="item_name"><p style="margin-top:10px;">{{ item.name }}</p></div>
-        <img src="{% static item.images.all.0 %}" class="item_img" draggable="false">
+    {% for i in item.images.all %}
+        <div class="mySlides">
+            <img src="{% static i %}" class="item_img" draggable="false">
+        </div>
+    {% endfor %}
+    <div style="text-align:center; margin-top: 15px;">
+        {% for i in images_count %}
+        <span class="dot" onclick="currentSlide({{ i }})"></span>
+        {% endfor %}
+    </div>
+    <div class="item_price">
+        <p style="vertical-align: middle;">{{ item.cost }} руб</p>
+    </div>
+    <div class="line"></div>
+    <div class="button_container">
+        <div class="favorite"><img src="/static/main/png/like.png" class="like_img" draggable="false"></div>
+        <a href="{% url 'home' %}" class="buy_button"><p>купить</p></a>
+    </div>
+</div>
+
+<div class="item_setting">
+
 </div>
 
 {% endblock %}
