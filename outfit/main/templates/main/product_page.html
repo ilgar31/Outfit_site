@@ -19,9 +19,15 @@
 <div class="item_box">
     <div class="item_name"><p style="margin-top:10px;">{{ item.name }}</p></div>
     {% for i in item.images.all %}
-        <div class="mySlides">
-            <img src="{% static i %}" class="item_img" draggable="false">
-        </div>
+        {% if i == item.images.all.0 %}
+            <div class="mySlides">
+                <img src="{% static i %}" class="item_img" draggable="false">
+            </div>
+        {% else %}
+            <div class="mySlides" style="display: none;">
+                <img src="{% static i %}" class="item_img" draggable="false">
+            </div>
+        {% endif %}
     {% endfor %}
     <div style="text-align:center; margin-top: 15px;">
         {% for i in images_count %}
@@ -33,8 +39,17 @@
     </div>
     <div class="line"></div>
     <div class="button_container">
-        <div class="favorite"><img src="/static/main/png/like.png" class="like_img" draggable="false"></div>
-        <a href="{% url 'home' %}" class="buy_button"><p>купить</p></a>
+        {% if request.user.is_authenticated %}
+            {% if in_favorites %}
+                <a href="{% url 'add_to_favourites' item.id %}" class="favorite"><img src="/static/main/png/heart_icon1.svg" class="like_img" draggable="false"></a>
+            {% else %}
+                <a href="{% url 'add_to_favourites' item.id %}" class="favorite"><img src="/static/main/png/heart_icon.svg" class="like_img" draggable="false"></a>
+            {% endif %}
+            <a href="{% url 'home' %}" class="buy_button"><p>купить</p></a>
+        {% else %}
+            <a href="{% url 'login' %}" class="favorite"><img src="/static/main/png/heart_icon.svg" class="like_img" draggable="false"></a>
+            <a href="{% url 'login' %}" class="buy_button"><p>купить</p></a>
+        {% endif %}
     </div>
 </div>
 

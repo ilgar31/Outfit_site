@@ -125,3 +125,16 @@ def search_results(request):
         return JsonResponse({"item": res})
     return JsonResponse({})
 
+
+def add_to_favourites(request, pk):
+    user = request.user
+    connection = Favorites.objects.filter(id_user=user.id, id_item=pk)
+    if connection:
+        connection[0].delete()
+        return redirect("product_page", pk)
+    product_add_to_favorite = Favorites()
+    product_add_to_favorite.id_item = pk
+    product_add_to_favorite.id_user = user.id
+    print(product_add_to_favorite)
+    product_add_to_favorite.save()
+    return redirect("product_page", pk)
