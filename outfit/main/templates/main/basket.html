@@ -1,0 +1,22 @@
+{% extends 'main/header.html' %}
+{% load static %}
+
+{% block link %}
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/basket.css' %}">
+{% endblock %}
+
+{% block title %}
+Главная страница
+{% endblock %}
+
+
+{% block content %}
+
+{% for item in items %}
+    <p>{{ item.name }}</p>
+    <p>{{ item.cost }}</p>
+
+{% endfor %}
+
+
+{% endblock %}

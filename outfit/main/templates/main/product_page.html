@@ -45,7 +45,7 @@
             {% else %}
                 <a href="{% url 'add_to_favourites' item.id %}" class="favorite"><img src="/static/main/png/heart_icon.svg" class="like_img" draggable="false"></a>
             {% endif %}
-            <a href="{% url 'home' %}" class="buy_button"><p>купить</p></a>
+            <a href="{% url 'add_to_basket' item.id %}" class="buy_button"><p>купить</p></a>
         {% else %}
             <a href="{% url 'login' %}" class="favorite"><img src="/static/main/png/heart_icon.svg" class="like_img" draggable="false"></a>
             <a href="{% url 'login' %}" class="buy_button"><p>купить</p></a>

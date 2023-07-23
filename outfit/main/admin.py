@@ -1,8 +1,9 @@
 from django.contrib import admin
-from .models import Profile, Items, Item_images, Favorites, Item_sizes
+from .models import Profile, Items, Item_images, Favorites, Item_sizes, Basket
 
 admin.site.register(Profile)
 admin.site.register(Favorites)
+admin.site.register(Basket)
 
 
 class Item_imagesInline(admin.TabularInline):

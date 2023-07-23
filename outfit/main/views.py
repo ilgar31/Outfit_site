@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import UserRegistrationForm, ProfileForm
 from django.contrib.auth import authenticate, login, logout
 from django.forms import TextInput
-from .models import Items, Favorites
+from .models import Items, Favorites, Basket
 from django.http import JsonResponse
 import json
 
@@ -157,3 +157,25 @@ def add_to_favourites(request, pk):
     print(product_add_to_favorite)
     product_add_to_favorite.save()
     return redirect("product_page", pk)
+
+
+def basket(request):
+    user = request.user
+    items_in_basket = Basket.objects.filter(id_user=user.id)
+    items = []
+    for i in items_in_basket:
+        items.append(Items.objects.get(id=i.id_item))
+    print(items)
+    return render(request, "main/basket.html", {"user": user, "items": items})
+
+
+def add_to_basket(request, pk):
+    user = request.user
+    if Basket.objects.filter(id_user=user.id, id_item=pk):
+        return redirect("product_page", pk)
+    product_add_to_basket = Basket()
+    product_add_to_basket.id_item = pk
+    product_add_to_basket.id_user = user.id
+    product_add_to_basket.save()
+    return redirect("product_page", pk)
+
