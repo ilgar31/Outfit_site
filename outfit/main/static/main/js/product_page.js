@@ -21,3 +21,20 @@ function showSlides(n) {
 }
 
 
+var type_size = 0;
+showSize(type_size);
+
+function currentSize(n) {
+    showSize(type_size = n);
+}
+
+function showSize(n) {
+  var i;
+  var types = document.getElementsByClassName("type_size");
+  var dots = document.getElementsByClassName("type_button");
+
+  for (i = 0; i < types.length; i++) {
+      types[i].style.display = "none";
+  }
+  types[type_size].style.display = "inline-block";
+}

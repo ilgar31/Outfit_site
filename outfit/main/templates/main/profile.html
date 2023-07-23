@@ -38,7 +38,9 @@
 <div class="favorites">
     {% for i in favorites_items %}
         <a href="{% url 'product_page' i.id %}" class="item_box">
-            <img src="{% static i.images.all.0 %}" class="item_img" draggable="false">
+            <div style="display: block; height: 260px; line-height: 210px;">
+                <img src="{% static i.images.all.0 %}" class="item_img" draggable="false">
+            </div>
             <p class="item_name">{{ i.name }}</p>
             <p class="item_price">{{ i.cost }} руб</p>
         </a>

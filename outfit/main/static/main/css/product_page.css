@@ -134,3 +134,110 @@
     -moz-box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.2);
     box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.2);
 }
+
+
+.radio_type {
+	display: inline-block;
+	margin-right: 10px;
+}
+.radio_type input[type=radio] {
+	display: none;
+}
+.radio_type label {
+    width: 30px;
+	display: inline-block;
+	cursor: pointer;
+	padding: 0px 15px;
+	line-height: 34px;
+	border-radius: 15px;
+	user-select: none;
+	background-color: #EAEAEA;
+    font-size: 21px;
+    font-family: Inter, sans-serif;}
+
+.radio_type input[type=radio]:checked + label {
+    background-color: #D4D4D4;
+    -webkit-box-shadow:inset 0px 0px 0px 3px #C64F00;
+    -moz-box-shadow:inset 0px 0px 0px 3px #C64F00;
+    box-shadow:inset 0px 0px 0px 3px #C64F00;
+}
+
+.radio_type label:hover {
+    background-color: #D4D4D4;
+}
+
+h1 {
+    font-family: Inter, sans-serif;
+}
+
+.type_size {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+.type_size input[type=radio] {
+	display: none;
+}
+
+.type_size label {
+    width: 30px;
+	display: inline-block;
+	cursor: pointer;
+	padding: 0px 15px;
+	line-height: 34px;
+	border-radius: 15px;
+	user-select: none;
+	background-color: #EAEAEA;
+    font-size: 21px;
+    font-family: Inter, sans-serif;}
+
+.type_size input[type=radio]:checked + label {
+    background-color: #D4D4D4;
+    -webkit-box-shadow:inset 0px 0px 0px 3px #C64F00;
+    -moz-box-shadow:inset 0px 0px 0px 3px #C64F00;
+    box-shadow:inset 0px 0px 0px 3px #C64F00;
+}
+
+.type_size label:hover {
+    background-color: #D4D4D4;
+}
+
+.other_colors {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+.other_colors a {
+    width: 30px;
+    height: 34  px;
+	display: inline-block;
+	cursor: pointer;
+	padding: 0px 15px;
+	line-height: 34px;
+	border-radius: 15px;
+	user-select: none;
+	background-color: #EAEAEA;
+    font-size: 21px;
+    font-family: Inter, sans-serif;
+}
+
+
+.other_colors a:hover {
+    background-color: #D4D4D4;
+}
+
+.color_button_now {
+    background-color: #D4D4D4;
+    -webkit-box-shadow:inset 0px 0px 0px 3px #C64F00;
+    -moz-box-shadow:inset 0px 0px 0px 3px #C64F00;
+    box-shadow:inset 0px 0px 0px 3px #C64F00;
+}
+
+
+.circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: red;
+    margin: 6.7px auto;
+}

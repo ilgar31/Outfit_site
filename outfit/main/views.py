@@ -95,13 +95,32 @@ def beautiful_price(number):
     return new_price[::-1]
 
 
+colors = {"Красный": "rgb(255, 0, 0)", "Белый": "rgb(255, 255, 255)", "Коричневый": "rgb(102, 51, 0)", "Черный": "rgb(0, 0, 0)", "Бежевый": "rgb(255, 204, 153)"}
+
+
 def product_page(request, pk):
     item = Items.objects.get(id=pk)
     item.cost = beautiful_price(item.cost)
     in_favorites = False
     if Favorites.objects.filter(id_user=request.user.id, id_item=pk):
         in_favorites = True
-    return render(request, "main/product_page.html", {"item": item, "images_count": range(len(item.images.all())), "in_favorites": in_favorites})
+    types_size = set()
+    for i in item.sizes.all():
+        types_size.add(i.type_size)
+    sizes = {"RU": [], "EU": []}
+    for i in item.sizes.all():
+        if i.type_size == "RU":
+            sizes["RU"].append(i.size)
+        elif i.type_size == "EU":
+            sizes["EU"].append(i.size)
+    for i in sizes:
+        sizes[i] = enumerate(sizes[i])
+
+    other_colors = []
+    for i in Items.objects.filter(name=item.name):
+        other_colors.append([i, colors[i.color]])
+
+    return render(request, "main/product_page.html", {"item": item, "images_count": range(len(item.images.all())), "in_favorites": in_favorites, "types_size": enumerate(list(types_size)), "sizes": sizes, "other_colors": other_colors})
 
 
 def search_results(request):

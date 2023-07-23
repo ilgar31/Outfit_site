@@ -44,7 +44,6 @@ def save_user_profile(sender, instance, **kwargs):
 class Items(models.Model):
     name = models.CharField("Имя товара", max_length=45, blank=True)
     type = models.CharField("Тип", max_length=35, blank=True)
-    size = models.CharField("Доступные размеры", max_length=35, blank=True)
     cost = models.IntegerField("Стоимость", blank=True)
     GENDER_CHOICES = (('M', 'Мужской'), ('F', 'Женский'))
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, blank=True)
@@ -66,6 +65,15 @@ class Item_images(models.Model):
 
     def __str__(self):
         return f'{self.image}'
+
+
+class Item_sizes(models.Model):
+    item = models.ForeignKey(Items, on_delete=models.CASCADE, related_name="sizes")
+    type_size = models.CharField("Тип размера (страна)", blank=True, max_length=10)
+    size = models.CharField("Размер", blank=True, max_length=10)
+
+    def __str__(self):
+        return f'{self.type_size}-{self.size}'
 
 
 class Favorites(models.Model):
