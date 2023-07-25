@@ -38,3 +38,7 @@ function showSize(n) {
   }
   types[type_size].style.display = "inline-block";
 }
+
+
+const url = window.location.href
+const csrf = document.getElementsByName("csrfmiddlewaretoken")[0].value

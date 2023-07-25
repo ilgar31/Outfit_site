@@ -71,8 +71,6 @@ def profile_change(request):
 
             profile_obj.save()
             return redirect("profile")
-        else:
-            print("no")
     else:
         profile_form = ProfileForm()
         profile_form.fields["user_name"].initial = request.user.profile.user_name
@@ -135,7 +133,7 @@ def search_results(request):
                     'name': i.name,
                     'color': i.color,
                     'image': '/static/' + str(i.images.all()[0]),
-                    'url': "product/" + str(i.pk)
+                    'url': "/product/" + str(i.pk)
                 }
                 data.append(element)
             res = data
@@ -154,7 +152,6 @@ def add_to_favourites(request, pk):
     product_add_to_favorite = Favorites()
     product_add_to_favorite.id_item = pk
     product_add_to_favorite.id_user = user.id
-    print(product_add_to_favorite)
     product_add_to_favorite.save()
     return redirect("product_page", pk)
 
@@ -165,7 +162,6 @@ def basket(request):
     items = []
     for i in items_in_basket:
         items.append(Items.objects.get(id=i.id_item))
-    print(items)
     return render(request, "main/basket.html", {"user": user, "items": items})
 
 
