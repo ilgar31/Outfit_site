@@ -91,6 +91,9 @@ class Favorites(models.Model):
 class Basket(models.Model):
     id_user = models.IntegerField("ID пользователя", blank=True)
     id_item = models.IntegerField("ID товара", blank=True)
+    item_type_size = models.CharField("Тип размера (страна)", blank=True, max_length=10)
+    item_size = models.CharField("Размер", blank=True, max_length=10)
+    count = models.IntegerField("Количество", default=1, blank=True)
 
     def __str__(self):
         return f"{self.id_user} -> {self.id_item}"

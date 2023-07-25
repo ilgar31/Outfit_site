@@ -156,6 +156,7 @@
     font-family: Inter, sans-serif;}
 
 .radio_type input[type=radio]:checked + label {
+    transition: 0.5s;
     background-color: #D4D4D4;
     -webkit-box-shadow:inset 0px 0px 0px 3px #C64F00;
     -moz-box-shadow:inset 0px 0px 0px 3px #C64F00;
@@ -192,6 +193,7 @@ h1 {
     font-family: Inter, sans-serif;}
 
 .type_size input[type=radio]:checked + label {
+    transition: 0.5s;
     background-color: #D4D4D4;
     -webkit-box-shadow:inset 0px 0px 0px 3px #C64F00;
     -moz-box-shadow:inset 0px 0px 0px 3px #C64F00;

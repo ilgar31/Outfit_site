@@ -12,11 +12,28 @@
 
 {% block content %}
 
-{% for item in items %}
-    <p>{{ item.name }}</p>
-    <p>{{ item.cost }}</p>
+{% if items %}
 
-{% endfor %}
+    <p class="basket_title">Корзина</p>
+    <items>
+        {% for i in items %}
+            <a href="{% url 'product_page' i.id %}" class="item_box">
+            <div style="display: block; height: 260px; line-height: 210px;">
+                <img src="{% static i.images.all.0 %}" class="item_img" draggable="false">
+            </div>
+            <p class="item_name">{{ i.name }}</p>
+            <p class="item_price">{{ i.cost }} руб</p>
+            </a>
+        {% endfor %}
+    </items>
 
+{% else %}
+
+<p class="basket_title">Корзина</p>
+<div class="wrapper">
+    <a href="{% url 'home' %}" class="add_items"><p>Добавить товары</p></a>
+</div>
+
+{% endif %}
 
 {% endblock %}

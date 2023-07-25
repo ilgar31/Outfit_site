@@ -1,5 +1,3 @@
-console.log('hello wdorld!')
-
 const url = window.location.href
 const searchForm = document.getElementById("search_form")
 const searchInput = document.getElementById("search_input")
@@ -11,7 +9,7 @@ const csrf = document.getElementsByName("csrfmiddlewaretoken")[0].value
 const sendSearchData = (item) => {
     $.ajax({
         type: "POST",
-        url: 'search/',
+        url: '/search/',
         data: {
             "csrfmiddlewaretoken": csrf,
             'item': item,

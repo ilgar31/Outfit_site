@@ -134,7 +134,7 @@ def search_results(request):
                     'pk': i.pk,
                     'name': i.name,
                     'color': i.color,
-                    'image': 'static/' + str(i.images.all()[0]),
+                    'image': '/static/' + str(i.images.all()[0]),
                     'url': "product/" + str(i.pk)
                 }
                 data.append(element)
