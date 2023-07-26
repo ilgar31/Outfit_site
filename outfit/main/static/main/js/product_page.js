@@ -40,5 +40,10 @@ function showSize(n) {
 }
 
 
-const url = window.location.href
-const csrf = document.getElementsByName("csrfmiddlewaretoken")[0].value
+const BuyButton = document.getElementById("buy_button")
+const BuyFrom = document.getElementById("buy_form")
+
+
+BuyButton.addEventListener('click', e=> {
+
+})

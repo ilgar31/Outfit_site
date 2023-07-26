@@ -97,6 +97,9 @@ colors = {"Красный": "rgb(255, 0, 0)", "Белый": "rgb(255, 255, 255)"
 
 
 def product_page(request, pk):
+    if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+        pass
+
     item = Items.objects.get(id=pk)
     item.cost = beautiful_price(item.cost)
     in_favorites = False

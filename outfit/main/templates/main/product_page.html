@@ -15,97 +15,99 @@
 
 
 {% block content %}
-
-<div class="item_box">
-    <div class="item_name"><p style="margin-top:10px;">{{ item.name }}</p></div>
-    {% for i in item.images.all %}
-        {% if i == item.images.all.0 %}
-            <div class="mySlides">
-                <img src="{% static i %}" class="item_img" draggable="false">
-            </div>
-        {% else %}
-            <div class="mySlides" style="display: none;">
-                <img src="{% static i %}" class="item_img" draggable="false">
-            </div>
-        {% endif %}
-    {% endfor %}
-    <div style="text-align:center; margin-top: 15px;">
-        {% for i in images_count %}
-        <span class="dot" onclick="currentSlide({{ i }})"></span>
-        {% endfor %}
-    </div>
-    <div class="item_price">
-        <p style="vertical-align: middle;">{{ item.cost }} руб</p>
-    </div>
-    <div class="line"></div>
-    <div class="button_container">
-        {% if request.user.is_authenticated %}
-            {% if in_favorites %}
-                <a href="{% url 'add_to_favourites' item.id %}" class="favorite"><img src="/static/main/png/heart_icon1.svg" class="like_img" draggable="false"></a>
+<form id="buy_form">
+    {% csrf_token %}
+    <div class="item_box">
+        <div class="item_name"><p style="margin-top:10px;">{{ item.name }}</p></div>
+        {% for i in item.images.all %}
+            {% if i == item.images.all.0 %}
+                <div class="mySlides">
+                    <img src="{% static i %}" class="item_img" draggable="false">
+                </div>
             {% else %}
-                <a href="{% url 'add_to_favourites' item.id %}" class="favorite"><img src="/static/main/png/heart_icon.svg" class="like_img" draggable="false"></a>
-            {% endif %}
-            <a href="{% url 'add_to_basket' item.id %}" class="buy_button"><p>купить</p></a>
-        {% else %}
-            <a href="{% url 'login' %}" class="favorite"><img src="/static/main/png/heart_icon.svg" class="like_img" draggable="false"></a>
-            <a href="{% url 'login' %}" class="buy_button"><p>купить</p></a>
-        {% endif %}
-    </div>
-</div>
-
-<div class="item_setting">
-    <h1 class="sizes_title">Размерная сетка</h1>
-    <div class="radio_type">
-        {% for index, type in types_size %}
-            {% if index == 0 %}
-                <input type="radio" class="type_button" value="{{ index }}" id="{{index}}" name="radio" onclick="currentSize({{ index }})" checked>
-                <label for="{{index}}">RU</label>
-            {% else %}
-                <input type="radio" class="type_button" value="{{ index }}" id="{{index}}" name="radio" onclick="currentSize({{ index }})">
-                <label for="{{index}}">EU</label>
+                <div class="mySlides" style="display: none;">
+                    <img src="{% static i %}" class="item_img" draggable="false">
+                </div>
             {% endif %}
         {% endfor %}
-    </div>
-
-    <h1 class="sizes_value">Размер</h1>
-    <div class="radio_size">
-        <div class="type_size">
-            {% for index, size in sizes.RU %}
-                {% if index == 0 %}
-                    <input type="radio" class="type_button" value="RU-{{ size }}" id="RU-{{size}}" name="RU" checked>
-                    <label for="RU-{{size}}">{{ size }}</label>
+        <div style="text-align:center; margin-top: 15px;">
+            {% for i in images_count %}
+            <span class="dot" onclick="currentSlide({{ i }})"></span>
+            {% endfor %}
+        </div>
+        <div class="item_price">
+            <p style="vertical-align: middle;">{{ item.cost }} руб</p>
+        </div>
+        <div class="line"></div>
+        <div class="button_container">
+            {% if request.user.is_authenticated %}
+                {% if in_favorites %}
+                    <a href="{% url 'add_to_favourites' item.id %}" class="favorite"><img src="/static/main/png/heart_icon1.svg" class="like_img" draggable="false"></a>
                 {% else %}
-                    <input type="radio" class="type_button" value="RU-{{ size }}" id="RU-{{size}}" name="RU">
-                    <label for="RU-{{size}}">{{ size }}</label>
+                    <a href="{% url 'add_to_favourites' item.id %}" class="favorite"><img src="/static/main/png/heart_icon.svg" class="like_img" draggable="false"></a>
+                {% endif %}
+                <button id="buy_button" class="buy_button" type="button"><p>купить</p></button>
+            {% else %}
+                <a href="{% url 'login' %}" class="favorite"><img src="/static/main/png/heart_icon.svg" class="like_img" draggable="false"></a>
+                <a href="{% url 'login' %}" class="buy_button"><p>купить</p></a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="item_setting">
+        <h1 class="sizes_title">Размерная сетка</h1>
+        <div class="radio_type">
+            {% for index, type in types_size %}
+                {% if index == 0 %}
+                    <input type="radio" class="type_button" value="RU" id="{{index}}" name="radio" onclick="currentSize({{ index }})" checked>
+                    <label for="{{index}}">RU</label>
+                {% else %}
+                    <input type="radio" class="type_button" value="EU" id="{{index}}" name="radio" onclick="currentSize({{ index }})">
+                    <label for="{{index}}">EU</label>
                 {% endif %}
             {% endfor %}
         </div>
-        <div class="type_size">
-            {% for index, size in sizes.EU %}
-                {% if index == 0 %}
-                    <input type="radio" class="type_button" value="EU-{{ index }}" id="EU-{{size}}" name="EU" checked>
-                    <label for="EU-{{size}}">{{ size }}</label>
+
+        <h1 class="sizes_value">Размер</h1>
+        <div class="radio_size">
+            <div class="type_size">
+                {% for index, size in sizes.RU %}
+                    {% if index == 0 %}
+                        <input type="radio" class="type_button" value="RU-{{ size }}" id="RU-{{size}}" name="RU" checked>
+                        <label for="RU-{{size}}">{{ size }}</label>
+                    {% else %}
+                        <input type="radio" class="type_button" value="RU-{{ size }}" id="RU-{{size}}" name="RU">
+                        <label for="RU-{{size}}">{{ size }}</label>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="type_size">
+                {% for index, size in sizes.EU %}
+                    {% if index == 0 %}
+                        <input type="radio" class="type_button" value="EU-{{ size }}" id="EU-{{size}}" name="EU" checked>
+                        <label for="EU-{{size}}">{{ size }}</label>
+                    {% else %}
+                        <input type="radio" class="type_button" value="EU-{{ size }}" id="EU-{{size}}" name="EU">
+                        <label for="EU-{{size}}">{{ size }}</label>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <h1 class="colors">Цвет</h1>
+        <div class="other_colors">
+            {% for other_item, color in other_colors %}
+                {% if other_item == item %}
+                    <a href="{% url 'product_page' other_item.id %}" class="color_button_now" style="background-color: #D4D4D4;">
+                        <div class="circle" style="background-color: {{ color }};"></div>
+                    </a>
                 {% else %}
-                    <input type="radio" class="type_button" value="EU-{{ index }}" id="EU-{{size}}" name="EU">
-                    <label for="EU-{{size}}">{{ size }}</label>
+                    <a href="{% url 'product_page' other_item.id %}" class="color_button">
+                        <div class="circle" style="background-color: {{ color }};"></div>
+                    </a>
                 {% endif %}
             {% endfor %}
         </div>
     </div>
-    <h1 class="colors">Цвет</h1>
-    <div class="other_colors">
-        {% for other_item, color in other_colors %}
-            {% if other_item == item %}
-                <a href="{% url 'product_page' other_item.id %}" class="color_button_now" style="background-color: #D4D4D4;">
-                    <div class="circle" style="background-color: {{ color }};"></div>
-                </a>
-            {% else %}
-                <a href="{% url 'product_page' other_item.id %}" class="color_button">
-                    <div class="circle" style="background-color: {{ color }};"></div>
-                </a>
-            {% endif %}
-        {% endfor %}
-    </div>
-</div>
+</form>
 
 {% endblock %}

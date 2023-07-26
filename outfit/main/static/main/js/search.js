@@ -59,3 +59,9 @@ searchInput.addEventListener('keyup', e=> {
 
     sendSearchData(e.target.value)
 })
+
+window.addEventListener('click', e=> {
+    if (!($('#search_input').is(":focus"))) {
+        resultsBox.classList.add('not-visible')
+    }
+})
