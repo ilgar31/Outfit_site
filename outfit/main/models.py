@@ -96,7 +96,7 @@ class Basket(models.Model):
     count = models.IntegerField("Количество", default=1, blank=True)
 
     def __str__(self):
-        return f"{self.id_user} -> {self.id_item}"
+        return f"{self.id_user} -> {self.id_item} ({self.item_type_size}-{self.item_size})"
 
     class Meta:
         verbose_name = "Корзина"

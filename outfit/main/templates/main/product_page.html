@@ -73,10 +73,10 @@
             <div class="type_size">
                 {% for index, size in sizes.RU %}
                     {% if index == 0 %}
-                        <input type="radio" class="type_button" value="RU-{{ size }}" id="RU-{{size}}" name="RU" checked>
+                        <input type="radio" class="type_button" value="{{ size }}" id="RU-{{size}}" name="RU" checked>
                         <label for="RU-{{size}}">{{ size }}</label>
                     {% else %}
-                        <input type="radio" class="type_button" value="RU-{{ size }}" id="RU-{{size}}" name="RU">
+                        <input type="radio" class="type_button" value="{{ size }}" id="RU-{{size}}" name="RU">
                         <label for="RU-{{size}}">{{ size }}</label>
                     {% endif %}
                 {% endfor %}
@@ -84,10 +84,10 @@
             <div class="type_size">
                 {% for index, size in sizes.EU %}
                     {% if index == 0 %}
-                        <input type="radio" class="type_button" value="EU-{{ size }}" id="EU-{{size}}" name="EU" checked>
+                        <input type="radio" class="type_button" value="{{ size }}" id="EU-{{size}}" name="EU" checked>
                         <label for="EU-{{size}}">{{ size }}</label>
                     {% else %}
-                        <input type="radio" class="type_button" value="EU-{{ size }}" id="EU-{{size}}" name="EU">
+                        <input type="radio" class="type_button" value="{{ size }}" id="EU-{{size}}" name="EU">
                         <label for="EU-{{size}}">{{ size }}</label>
                     {% endif %}
                 {% endfor %}

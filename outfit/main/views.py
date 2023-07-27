@@ -97,8 +97,29 @@ colors = {"Красный": "rgb(255, 0, 0)", "Белый": "rgb(255, 255, 255)"
 
 
 def product_page(request, pk):
+    item_in_basket = False
+
     if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
-        pass
+
+        #Проверка
+        if request.POST.get("type_size") == "RU":
+            if Basket.objects.filter(id_user=request.user.id, id_item=pk, item_type_size=request.POST.get("type_size"), item_size = request.POST.get("RU_size")):
+                item_in_basket = True
+        else:
+            if Basket.objects.filter(id_user=request.user.id, id_item=pk, item_type_size=request.POST.get("type_size"), item_size = request.POST.get("EU_size")):
+                item_in_basket = True
+
+        if not item_in_basket:
+            product_add_to_basket = Basket()
+            product_add_to_basket.id_item = pk
+            product_add_to_basket.id_user = request.user.id
+            product_add_to_basket.item_type_size = request.POST.get("type_size")
+            if request.POST.get("type_size") == "RU":
+                product_add_to_basket.item_size = request.POST.get("RU_size")
+            else:
+                product_add_to_basket.item_size = request.POST.get("EU_size")
+            product_add_to_basket.save()
+            item_in_basket = True
 
     item = Items.objects.get(id=pk)
     item.cost = beautiful_price(item.cost)
@@ -121,7 +142,7 @@ def product_page(request, pk):
     for i in Items.objects.filter(name=item.name):
         other_colors.append([i, colors[i.color]])
 
-    return render(request, "main/product_page.html", {"item": item, "images_count": range(len(item.images.all())), "in_favorites": in_favorites, "types_size": enumerate(list(types_size)), "sizes": sizes, "other_colors": other_colors})
+    return render(request, "main/product_page.html", {"item": item, "images_count": range(len(item.images.all())), "in_favorites": in_favorites, "types_size": enumerate(list(types_size)), "sizes": sizes, "other_colors": other_colors, "item_in_basket": item_in_basket})
 
 
 def search_results(request):
@@ -167,14 +188,4 @@ def basket(request):
         items.append(Items.objects.get(id=i.id_item))
     return render(request, "main/basket.html", {"user": user, "items": items})
 
-
-def add_to_basket(request, pk):
-    user = request.user
-    if Basket.objects.filter(id_user=user.id, id_item=pk):
-        return redirect("product_page", pk)
-    product_add_to_basket = Basket()
-    product_add_to_basket.id_item = pk
-    product_add_to_basket.id_user = user.id
-    product_add_to_basket.save()
-    return redirect("product_page", pk)
 

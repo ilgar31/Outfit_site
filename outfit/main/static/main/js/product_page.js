@@ -42,8 +42,47 @@ function showSize(n) {
 
 const BuyButton = document.getElementById("buy_button")
 const BuyFrom = document.getElementById("buy_form")
+const size_types = $('input[name="radio"]');
+var size_type;
+const Rsizes = $('input[name="RU"]');
+const Esizes = $('input[name="EU"]');
+var Rsize;
+var Esize;
 
 
 BuyButton.addEventListener('click', e=> {
 
+    for (i = 0; i < size_types.length; i++) {
+        if (size_types[i].checked) {
+            size_type = size_types[i].value;
+        }
+    }
+
+    for (i = 0; i < Rsizes.length; i++) {
+        if (Rsizes[i].checked) {
+            Rsize = Rsizes[i].value;
+        }
+    }
+
+    for (i = 0; i < Esizes.length; i++) {
+        if (Esizes[i].checked) {
+            Esize = Esizes[i].value;
+        }
+    }
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            "csrfmiddlewaretoken": csrf,
+            'type_size': size_type,
+            'RU_size': Rsize,
+            'EU_size': Esize,
+        },
+        success: (res)=> {
+            console.log("added")
+        },
+        error: (err)=> {
+            console.log("error")
+        }
+    })
 })
