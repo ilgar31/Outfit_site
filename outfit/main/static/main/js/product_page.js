@@ -80,6 +80,9 @@ BuyButton.addEventListener('click', e=> {
         },
         success: (res)=> {
             console.log("added")
+            BuyButton.className = "basket_button"
+            BuyButton.innerHTML = `<p>Перейти в корзину<p>`
+            BuyButton.setAttribute('href', "/basket")
         },
         error: (err)=> {
             console.log("error")

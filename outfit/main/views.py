@@ -121,6 +121,8 @@ def product_page(request, pk):
             product_add_to_basket.save()
             item_in_basket = True
 
+        print(item_in_basket)
+
     item = Items.objects.get(id=pk)
     item.cost = beautiful_price(item.cost)
     in_favorites = False
@@ -142,7 +144,7 @@ def product_page(request, pk):
     for i in Items.objects.filter(name=item.name):
         other_colors.append([i, colors[i.color]])
 
-    return render(request, "main/product_page.html", {"item": item, "images_count": range(len(item.images.all())), "in_favorites": in_favorites, "types_size": enumerate(list(types_size)), "sizes": sizes, "other_colors": other_colors, "item_in_basket": item_in_basket})
+    return render(request, "main/product_page.html", {"item": item, "images_count": range(len(item.images.all())), "in_favorites": in_favorites, "types_size": enumerate(list(types_size)), "sizes": sizes, "other_colors": other_colors})
 
 
 def search_results(request):
