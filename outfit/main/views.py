@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import UserRegistrationForm, ProfileForm
 from django.contrib.auth import authenticate, login, logout
 from django.forms import TextInput
-from .models import Items, Favorites, Basket
+from .models import Items, Favorites, Basket, Profile
 from django.http import JsonResponse
 import json
 
@@ -43,8 +43,8 @@ def login_page(request):
     return render(request, "main/login.html")
 
 
-def profile(request):
-    favorites = Favorites.objects.filter(id_user=request.user.id)
+def profile(request, pk):
+    favorites = Favorites.objects.filter(id_user=pk)
     favorites_items = []
     for item in favorites:
         favorites_items.extend(Items.objects.filter(id=item.id_item))
@@ -170,13 +170,16 @@ def search_results(request):
     if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
         item = request.POST.get('item')
         search_items = Items.objects.filter(name__icontains=item)
+        # users = Profile.objects.all()
+        # search_users = []
+        # for i in range(len(users)):
+        #     search_users.append(users[i].user.username)
         if len(search_items) > 0 and len(item.replace(" ", '')) > 0:
             data = []
             for i in search_items:
                 element = {
                     'pk': i.pk,
                     'name': i.name,
-                    'color': i.color,
                     'image': '/static/' + str(i.images.all()[0]),
                     'url': "/product/" + str(i.pk)
                 }
@@ -192,8 +195,10 @@ def basket(request):
     user = request.user
     items_in_basket = Basket.objects.filter(id_user=user.id)
     items = []
+    cost = 0
     for i in items_in_basket:
         items.append(Items.objects.get(id=i.id_item))
-    return render(request, "main/basket.html", {"user": user, "items": items})
+        cost += items[-1].cost
+    return render(request, "main/basket.html", {"user": user, "items": items, "cost": cost})
 
 
