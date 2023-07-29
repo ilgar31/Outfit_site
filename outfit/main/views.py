@@ -99,7 +99,7 @@ colors = {"Красный": "rgb(255, 0, 0)", "Белый": "rgb(255, 255, 255)"
 def product_page(request, pk):
     item_in_basket = False
 
-    if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+    if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest' and request.POST.get("type_POST") == "basket":
 
         #Проверка
         if request.POST.get("type_size") == "RU":
@@ -128,6 +128,21 @@ def product_page(request, pk):
     in_favorites = False
     if Favorites.objects.filter(id_user=request.user.id, id_item=pk):
         in_favorites = True
+
+    if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest' and request.POST.get("type_POST") == "like":
+        if in_favorites:
+            Favorites.objects.get(id_user=request.user.id, id_item=pk).delete()
+            res = "/static/main/png/heart_icon.svg"
+
+        else:
+            product_add_to_favorite = Favorites()
+            product_add_to_favorite.id_item = pk
+            product_add_to_favorite.id_user = request.user.id
+            product_add_to_favorite.save()
+            res = "/static/main/png/heart_icon1.svg"
+
+        return JsonResponse({"img": res})
+
     types_size = set()
     for i in item.sizes.all():
         types_size.add(i.type_size)
@@ -144,7 +159,11 @@ def product_page(request, pk):
     for i in Items.objects.filter(name=item.name):
         other_colors.append([i, colors[i.color]])
 
-    return render(request, "main/product_page.html", {"item": item, "images_count": range(len(item.images.all())), "in_favorites": in_favorites, "types_size": enumerate(list(types_size)), "sizes": sizes, "other_colors": other_colors})
+    if in_favorites:
+        icon = "/static/main/png/heart_icon1.svg"
+    else:
+        icon = "/static/main/png/heart_icon.svg"
+    return render(request, "main/product_page.html", {"item": item, "images_count": range(len(item.images.all())), "icon": icon, "types_size": enumerate(list(types_size)), "sizes": sizes, "other_colors": other_colors})
 
 
 def search_results(request):
@@ -167,19 +186,6 @@ def search_results(request):
             res = "Товар не найден"
         return JsonResponse({"item": res})
     return JsonResponse({})
-
-
-def add_to_favourites(request, pk):
-    user = request.user
-    connection = Favorites.objects.filter(id_user=user.id, id_item=pk)
-    if connection:
-        connection[0].delete()
-        return redirect("product_page", pk)
-    product_add_to_favorite = Favorites()
-    product_add_to_favorite.id_item = pk
-    product_add_to_favorite.id_user = user.id
-    product_add_to_favorite.save()
-    return redirect("product_page", pk)
 
 
 def basket(request):

@@ -41,12 +41,10 @@
         <div class="line"></div>
         <div class="button_container">
             {% if request.user.is_authenticated %}
-                {% if in_favorites %}
-                    <a href="{% url 'add_to_favourites' item.id %}" class="favorite"><img src="/static/main/png/heart_icon1.svg" class="like_img" draggable="false"></a>
-                {% else %}
-                    <a href="{% url 'add_to_favourites' item.id %}" class="favorite"><img src="/static/main/png/heart_icon.svg" class="like_img" draggable="false"></a>
-                {% endif %}
-                 <a id="buy_button" class="buy_button"><p>купить</p></a>
+                <span class="favorite" id="like_button">
+                    <img src={{ icon }} class="like_img" id="img_like" draggable="false">
+                </span>
+            <span id="buy_button" class="buy_button"><p>купить</p></span>
             {% else %}
                 <a href="{% url 'login' %}" class="favorite"><img src="/static/main/png/heart_icon.svg" class="like_img" draggable="false"></a>
                 <a href="{% url 'login' %}" class="buy_button"><p>купить</p></a>

@@ -77,12 +77,37 @@ BuyButton.addEventListener('click', e=> {
             'type_size': size_type,
             'RU_size': Rsize,
             'EU_size': Esize,
+            "type_POST": "basket",
         },
         success: (res)=> {
             console.log("added")
             BuyButton.className = "basket_button"
             BuyButton.innerHTML = `<p>Перейти в корзину<p>`
-            BuyButton.setAttribute('href', "/basket")
+            BuyButton.setAttribute('onclick', "window.location.href='/basket'")
+        },
+        error: (err)=> {
+            console.log("error")
+        }
+    })
+})
+
+
+const LikeButton = document.getElementById("like_button")
+
+
+
+LikeButton.addEventListener('click', e=> {
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            "csrfmiddlewaretoken": csrf,
+            "type_POST": "like",
+        },
+        success: (res)=> {
+            console.log("added")
+            console.log(res)
+            document.getElementById("img_like").setAttribute("src", res.img)
         },
         error: (err)=> {
             console.log("error")
