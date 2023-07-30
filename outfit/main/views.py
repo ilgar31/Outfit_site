@@ -121,8 +121,6 @@ def product_page(request, pk):
             product_add_to_basket.save()
             item_in_basket = True
 
-        print(item_in_basket)
-
     item = Items.objects.get(id=pk)
     item.cost = beautiful_price(item.cost)
     in_favorites = False
