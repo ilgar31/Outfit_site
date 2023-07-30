@@ -97,11 +97,9 @@ colors = {"Красный": "rgb(255, 0, 0)", "Белый": "rgb(255, 255, 255)"
 
 
 def product_page(request, pk):
-    item_in_basket = False
-
     if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest' and request.POST.get("type_POST") == "basket":
-
         #Проверка
+        item_in_basket = False
         if request.POST.get("type_size") == "RU":
             if Basket.objects.filter(id_user=request.user.id, id_item=pk, item_type_size=request.POST.get("type_size"), item_size = request.POST.get("RU_size")):
                 item_in_basket = True
@@ -109,7 +107,7 @@ def product_page(request, pk):
             if Basket.objects.filter(id_user=request.user.id, id_item=pk, item_type_size=request.POST.get("type_size"), item_size = request.POST.get("EU_size")):
                 item_in_basket = True
 
-        if not item_in_basket:
+        if not item_in_basket and request.POST.get("class") == "buy_button":
             product_add_to_basket = Basket()
             product_add_to_basket.id_item = pk
             product_add_to_basket.id_user = request.user.id
@@ -118,8 +116,9 @@ def product_page(request, pk):
                 product_add_to_basket.item_size = request.POST.get("RU_size")
             else:
                 product_add_to_basket.item_size = request.POST.get("EU_size")
-            product_add_to_basket.save()
             item_in_basket = True
+            product_add_to_basket.save()
+
 
     item = Items.objects.get(id=pk)
     item.cost = beautiful_price(item.cost)
@@ -194,9 +193,36 @@ def basket(request):
     items_in_basket = Basket.objects.filter(id_user=user.id)
     items = []
     cost = 0
+    count = 0
     for i in items_in_basket:
-        items.append(Items.objects.get(id=i.id_item))
-        cost += items[-1].cost
-    return render(request, "main/basket.html", {"user": user, "items": items, "cost": cost})
+        items.append({"item": Items.objects.get(id=i.id_item), "basket": i})
+        cost += items[-1]["item"].cost * items[-1]['basket'].count
+        count += items[-1]['basket'].count
+
+    if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest' and request.POST.get("type") == 'delete':
+        item = Basket.objects.get(id=request.POST.get("id"))
+        cost -= Items.objects.get(id=item.id_item).cost * item.count
+        count -= item.count
+        item.delete()
+        return JsonResponse({"count": count, "cost": cost})
+    if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest' and request.POST.get("type") == 'change_count':
+        item = Basket.objects.get(id=request.POST.get("id"))
+        item_count = item.count
+
+        if request.POST.get("operation") == "plus":
+            item_count += 1
+            item.count += 1
+            item.save()
+            cost += Items.objects.get(id=item.id_item).cost
+            count += 1
+        else:
+            item_count -= 1
+            item.count -= 1
+            item.save()
+            cost -= Items.objects.get(id=item.id_item).cost
+            count -= 1
+        return JsonResponse({"count": count, "cost": cost, "item_count": item_count})
+
+    return render(request, "main/basket.html", {"user": user, "items": enumerate(items), "cost": cost, "count": count})
 
 

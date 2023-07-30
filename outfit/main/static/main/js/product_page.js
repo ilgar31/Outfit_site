@@ -78,6 +78,7 @@ BuyButton.addEventListener('click', e=> {
             'RU_size': Rsize,
             'EU_size': Esize,
             "type_POST": "basket",
+            "class": BuyButton.className,
         },
         success: (res)=> {
             console.log("added")

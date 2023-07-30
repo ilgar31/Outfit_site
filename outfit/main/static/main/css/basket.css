@@ -67,18 +67,16 @@ items {
 }
 
 .item_price {
-    margin-block-start: 20px;
+    margin-block-start: 10px;
     margin-block-end: 0;
     font-size: 21px;
     font-family: Inter, sans-serif;
     color: black;
-    text-align: left;
-    padding-left: 60px;
 }
 
 .item_box {
     width: 270px;
-    height: 360px;
+    height: 390px;
     background: #F4F4F4;
     font-size: 5vw;
     border-radius: 40px;
@@ -87,11 +85,10 @@ items {
     transition: 0.2s;
     text-decoration: none;
     margin-bottom: 20px;
+    cursor: pointer;
 }
 
 .item_box:hover{
-    width: 270px;
-    height: 360px;
     -webkit-box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.2);
     -moz-box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.2);
     box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.2);
@@ -121,12 +118,29 @@ items {
     width: 100%;
 }
 
+.count_items {
+    float: left;
+    margin-left: 50px;
+    font-size: 16px;
+    margin-top: -5px;
+    font-family: Inter, sans-serif;
+}
+
+.count_cost {
+    float: right;
+    margin-right: 50px;
+    font-size: 16px;
+    margin-top: -5px;
+    font-family: Inter, sans-serif;
+}
+
 .itog{
     float: left;
     margin-left: 50px;
     font-size: 23px;
-    margin-top: 5px;
+    margin-top: 35px;
     font-family: Inter, sans-serif;
+    position: absolute;
 }
 
 .cost_value {
@@ -145,4 +159,125 @@ items {
     background-color: #C64F00;
     margin-top: -75px;
     margin-right: 30px;
+}
+
+.delete {
+    border: 0;
+    margin-left: -80px;
+    margin-top: 20px;
+    position: absolute;
+    border-radius: 10px;
+}
+
+.delete:hover {
+    cursor: pointer;
+}
+
+.item_size {
+    float: right;
+    margin-right: 10px;
+    margin-top: 20px;
+    width: 70px;
+    height: 30px;
+    background-color: #EAEAEA;
+    border-radius: 35px;
+    font-family: Inter, sans-serif;
+    font-size: 18px;
+}
+
+.count{
+    display: inline;
+    font-family: Inter, sans-serif;
+    font-size: 30px;
+}
+
+.minus {
+    display: inline;
+    font-family: Inter, sans-serif;
+    font-size: 30px;
+}
+
+.plus {
+    display: inline;
+    font-family: Inter, sans-serif;
+    font-size: 30px;
+}
+
+.change_count {
+    margin-top: -15px;
+    position: absolute;
+    margin-left: 65px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 130px;
+}
+
+.promo {
+    width: 400px;
+    height: 200px;
+    border-radius: 30px;
+    top: 540px;
+    position: absolute;
+    left: 100%;
+    margin-left: -500px;
+}
+
+.promo p {
+    font-size: 20px;
+    margin-left: 30px;
+    font-family: Inter, sans-serif;
+}
+
+.promo input {
+    width: 325px;
+    margin-left: 25px;
+    height: 30px;
+    background-color: #F4F4F4;
+    border-radius: 30px;
+    border: 0;
+    font-family: Inter, sans-serif;
+    padding-left: 25px;
+}
+
+.promo input:hover{
+    -webkit-box-shadow:inset 0px 0px 0px 2px #C64F00;
+    -moz-box-shadow:inset 0px 0px 0px 2px #C64F00;
+    box-shadow:inset 0px 0px 0px 2px #C64F00;
+}
+
+.promo input:focus {
+    outline:none;
+    -webkit-box-shadow:inset 0px 0px 0px 2px #C64F00;
+    -moz-box-shadow:inset 0px 0px 0px 2px #C64F00;
+    box-shadow:inset 0px 0px 0px 2px #C64F00;
+}
+
+.promo button {
+    width: 150px;
+    background-color: #C64F00;
+    border-radius: 30px;
+    border: 0;
+    color: white;
+    margin-left: 125px;
+    height: 30px;
+    margin-top: 20px;
+    font-size: 16px;
+    font-family: Inter, sans-serif;
+    cursor: pointer;
+}
+
+.offer_button {
+    width: 320px;
+    height: 55px;
+    border-radius: 30px;
+    top: 790px;
+    position: absolute;
+    left: 100%;
+    margin-left: -460px;
+    border: 0;
+    font-size: 25px;
+    font-family: Inter, sans-serif;
+    cursor: pointer;
 }

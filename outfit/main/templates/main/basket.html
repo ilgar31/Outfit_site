@@ -5,6 +5,10 @@
 <link rel="stylesheet" type="text/css" href="{% static 'main/css/basket.css' %}">
 {% endblock %}
 
+{% block script %}
+<script src="{% static 'main/js/basket.js' %}" defer></script>
+{% endblock %}
+
 {% block title %}
 Главная страница
 {% endblock %}
@@ -12,18 +16,27 @@
 
 {% block content %}
 
-{% if items %}
+{% if count %}
 
     <p class="basket_title">Корзина</p>
     <items>
-        {% for i in items %}
-            <a href="{% url 'product_page' i.id %}" class="item_box">
-            <div style="display: block; height: 260px; line-height: 210px;">
-                <img src="{% static i.images.all.0 %}" class="item_img" draggable="false">
+        {% for index, i in items %}
+            <div class="item_box" id="item{{i.basket.id}}">
+                <a href="{% url 'product_page' i.item.id %}" style="text-decoration: none;">
+                    <div style="display: block; height: 260px; line-height: 210px;">
+                        <img src="{% static i.item.images.all.0 %}" class="item_img" draggable="false">
+                    </div>
+                    <p class="item_name">{{ i.item.name }}</p>
+                    <p class="item_price">{{ i.item.cost }} руб</p>
+                </a>
+                <button class="delete" id="delete{{index}}" onclick="removeitem({{i.basket.id}})"><img src="/static/main/png/delete.png"></button>
+                <div class="change_count">
+                    <span class="minus" onclick="minuscount({{ i.basket.id }})">-</span>
+                    <p class="count" id="count{{i.basket.id}}">{{ i.basket.count }}</p>
+                    <span class="plus" onclick="pluscount({{ i.basket.id}})">+</span>
+                </div>
+                <div class="item_size"><p style="margin-top: 3px;">{{ i.basket.item_type_size }}-{{ i.basket.item_size }}</p></div>
             </div>
-            <p class="item_name">{{ i.name }}</p>
-            <p class="item_price">{{ i.cost }} руб</p>
-            </a>
         {% endfor %}
     </items>
 
@@ -32,12 +45,19 @@
             <p class="your_order">Ваш заказ</p>
             <span class="circle"></span>
         </div>
-        <div class="cost">
+        <div class="cost" id="cost">
+            <p class="count_items">Товары, {{ count }} шт</p>
+            <p class="count_cost">{{ cost }} руб</p>
             <p class="itog">Итого</p>
             <p class="cost_value">{{ cost }} руб</p>
         </div>
-
     </div>
+    <div class="promo">
+        <p>Промокод</p>
+        <input type="text">
+        <button>Применить</button>
+    </div>
+    <button class="offer_button">Оформить заказ</button>
 
 {% else %}
 
