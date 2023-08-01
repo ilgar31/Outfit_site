@@ -226,3 +226,5 @@ def basket(request):
     return render(request, "main/basket.html", {"user": user, "items": enumerate(items), "cost": cost, "count": count})
 
 
+def purchase(request):
+    return render(request, 'main/purchase.html')
