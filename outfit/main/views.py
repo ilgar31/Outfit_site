@@ -3,7 +3,7 @@ from .forms import UserRegistrationForm, ProfileForm
 from django.contrib.auth import authenticate, login, logout
 from django.forms import TextInput
 from .models import Items, Favorites, Basket, Profile
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseNotFound
 import json
 
 
@@ -44,6 +44,8 @@ def login_page(request):
 
 
 def profile(request, pk):
+    if pk != request.user.id:
+        return HttpResponseNotFound("Страница другого пользователя")
     favorites = Favorites.objects.filter(id_user=pk)
     favorites_items = []
     for item in favorites:

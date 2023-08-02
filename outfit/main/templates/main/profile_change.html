@@ -5,6 +5,10 @@
 <link rel="stylesheet" type="text/css" href="{% static 'main/css/profile_change.css' %}">
 {% endblock %}
 
+{% block script %}
+<script src="{% static 'main/js/profile_change.js' %}" defer></script>
+{% endblock %}
+
 {% block title %}
 Главная страница
 {% endblock %}
@@ -28,11 +32,11 @@
         <p class="form_name" style="margin-top:40px;">Фотография</p>
         {% if request.user.profile.img %}
 
-        <img src="{% static request.user.profile.img %}" class="user_foto" draggable="false">
+        <img src="{% static request.user.profile.img %}" class="user_foto" draggable="false" id="foto">
 
         {% else %}
 
-        <div class="user_foto"><p class="name">{{ request.user.username.0.upper }}</p></div>
+        <div class="user_foto" id="nfoto"><p class="name">{{ request.user.username.0.upper }}</p></div>
 
         {% endif %}
 
