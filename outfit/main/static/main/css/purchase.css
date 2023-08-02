@@ -82,4 +82,91 @@ input[type=radio] {
     color: white;
 }
 
+.items_box {
+    position: absolute;
+    height: 550px;
+    width: 400px;
+    top: 11%;
+    left: 100%;
+    margin-top: 80px;
+    margin-left: -560px;
+    border-radius: 40px;
+    background-color: #F6F6F6;
+    text-align: center;
+    -webkit-box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.2);
+}
 
+.item_name {
+    width: 320px;
+    height: 45px;
+    background-color: #E8E8E8;
+    display: flex;
+    justify-content: center;
+    border-radius: 40px;
+    margin-top: 25px;
+    margin-left: 40px;
+    font-family: Inter, sans-serif;
+    font-size: 20px;
+}
+
+.item_img {
+    object-fit: contain;
+    max-width: 90%;
+    max-height: 300px;
+    border-radius: 40px;
+    vertical-align: middle;
+}
+
+.dot {
+    margin-top: 15px;
+    margin-left: 12px;
+    cursor: pointer;
+    height: 40px;
+    width: 40px;
+    background-color: #D9D9D9;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.5s ease;
+}
+
+.active, .dot:hover {
+    background-color: #717171;
+}
+
+.mySlides {
+    height: 300px;
+    line-height: 300px;
+    margin-top: 15px;
+}
+
+.item_price {
+    margin: auto;
+    width: 170px;
+    height: 40px;
+    font-size: 20px;
+    border-radius: 20px;
+    background-color: white;
+    font-family: Inter, sans-serif;
+    line-height: 40px;
+    margin-block-start: 0;
+}
+
+.line {
+    width: 400px;
+    border-top: 2px solid #E8E8E8;
+    margin-top: 25px;
+}
+
+.item_size {
+    float: right;
+    margin-right: 20px;
+    margin-top: -36px;
+    width: 75px;
+    height: 30px;
+    background-color: #EAEAEA;
+    border-radius: 35px;
+    font-family: Inter, sans-serif;
+    font-size: 18px;
+}

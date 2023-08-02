@@ -229,4 +229,9 @@ def basket(request):
 
 
 def purchase(request):
-    return render(request, 'main/purchase.html')
+    items = list(map(lambda x: {"item": Items.objects.get(id=x.id_item), "type_size": x.item_type_size, "size": x.item_size, "count": x.count}, Basket.objects.filter(id_user=request.user.id)))
+    number = 0
+    for i in items:
+        i['number_item'] = number
+        number += 1
+    return render(request, 'main/purchase.html', {"items": items})

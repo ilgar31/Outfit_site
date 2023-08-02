@@ -5,6 +5,10 @@
 <link rel="stylesheet" type="text/css" href="{% static 'main/css/purchase.css' %}">
 {% endblock %}
 
+{% block script %}
+<script src="{% static 'main/js/purchase.js' %}" defer></script>
+{% endblock %}
+
 {% block title %}
 Оформление заказа
 {% endblock %}
@@ -48,8 +52,35 @@
 
 </div>
 
-<div class="items">
-
-</div>
-
+{% for item in items %}
+    {% if item == items.0 %}
+        <div class="items_box">
+            <div class="item_name"><p style="margin-top:10px;">{{ item.item.name }}</p></div>
+            <div class="mySlides">
+                <img src="{% static item.item.images.all.0 %}" class="item_img" draggable="false">
+            </div>
+            <div class="item_price">
+                <p style="vertical-align: middle;">{{ item.item.cost }} руб</p>
+            </div>
+            <div class="item_size"><p style="margin-top: 3px;">{{ item.type_size }}-{{ item.size }}</p></div>
+            <div class="line"></div>
+            <span class="dot" onclick="plusItem(-1)"><p style="margin-top: 1px; font-size: 25px;">&#10094;</p></span>
+            <span class="dot" onclick="plusItem(1)"><p style="margin-top: 1px; font-size: 25px;">&#10095;</p></span>
+        </div>
+    {% else %}
+        <div class="items_box" style="display: none;">
+            <div class="item_name"><p style="margin-top:10px;">{{ item.item.name }}</p></div>
+            <div class="mySlides">
+                <img src="{% static item.item.images.all.0 %}" class="item_img" draggable="false">
+            </div>
+            <div class="item_price">
+                <p style="vertical-align: middle;">{{ item.item.cost }} руб</p>
+            </div>
+            <div class="item_size"><p style="margin-top: 3px;">{{ item.type_size }}-{{ item.size }}</p></div>
+            <div class="line"></div>
+            <span class="dot" onclick="plusItem(-1)"><p style="margin-top: 1px; font-size: 25px;">&#10094;</p></span>
+            <span class="dot" onclick="plusItem(1)"><p style="margin-top: 1px; font-size: 25px;">&#10095;</p></span>
+        </div>
+    {% endif %}
+{% endfor %}
 {% endblock %}
