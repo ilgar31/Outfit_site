@@ -19,32 +19,33 @@
 <p class="purchase_title">Оформление заказа</p>
 <div class="data">
     <form method="POST">
+        {% csrf_token %}
         <p class="form_title">Получатель</p>
         <p class="input_name">Телефон</p>
-        <input type="text">
+        <input type="text" name="number">
         <p class="input_name">Получатель (ФИО полностью)</p>
-        <input type="text">
+        <input type="text" name="FIO">
         <p class="input_name">Аккаунт в телеграмм</p>
-        <input type="text">
+        <input type="text" name="tg">
         <p class="input_name">Электронный адрес</p>
-        <input type="text">
+        <input type="text" name="email">
         <p class="form_title">Адрес доставки</p>
         <p class="input_name">Регион</p>
-        <input type="text">
+        <input type="text" name="region">
         <p class="input_name">Город</p>
-        <input type="text">
+        <input type="text" name="city">
         <p class="form_title">Способ доставки</p>
         <div class="radio">
-            <input type="radio" id="cd1" name="cd" value="1" checked>
+            <input type="radio" id="cd1" name="delivery" value="1" checked>
             <label for="cd1">СДЭК ... 700руб</label>
         </div>
         <div class="radio" style="margin-top: 25px;">
-            <input type="radio" id="cd2" name="cd" value="2">
+            <input type="radio" id="cd2" name="delivery" value="2">
             <label for="cd2">Самовывоз ... 0руб</label>
         </div>
         <p class="form_title">Способ оплаты</p>
         <div class="radio">
-            <input type="radio" id="co1" name="co" value="1" checked>
+            <input type="radio" id="co1" name="payment" value="1" checked>
             <label for="co1" style="padding-bottom: 60px;">Оплата банковской картой</label>
         </div>
         <button type="submit" class="offer_button">Оформить заказ</button>

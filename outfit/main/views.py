@@ -2,9 +2,10 @@ from django.shortcuts import render, redirect
 from .forms import UserRegistrationForm, ProfileForm
 from django.contrib.auth import authenticate, login, logout
 from django.forms import TextInput
-from .models import Items, Favorites, Basket, Profile
+from .models import Items, Favorites, Basket, Profile, Purchase, Items_purchase
 from django.http import JsonResponse, HttpResponseNotFound
 import json
+import random
 
 
 def index(request):
@@ -234,4 +235,27 @@ def purchase(request):
     for i in items:
         i['number_item'] = number
         number += 1
+    print(items)
+    if request.method == "POST":
+        new_purchase = Purchase()
+        new_purchase.id_user = request.user.id
+        new_purchase.offer_number = random.randint(100001, 999999)
+        new_purchase.number = request.POST.get("number")
+        new_purchase.FIO = request.POST.get("FIO")
+        new_purchase.tg = request.POST.get("tg")
+        new_purchase.email = request.POST.get("email")
+        new_purchase.region = request.POST.get("region")
+        new_purchase.city = request.POST.get("city")
+        new_purchase.delivery = request.POST.get("delivery")
+        new_purchase.payment = request.POST.get("payment")
+        new_purchase.save()
+
+        for i in items:
+            item_purchase = Items_purchase()
+            item_purchase.purchase = new_purchase
+            item_purchase.id_item = i['item'].id
+            item_purchase.item_type_size = i['type_size']
+            item_purchase.item_size = i['size']
+            item_purchase.count = i['count']
+            item_purchase.save()
     return render(request, 'main/purchase.html', {"items": items})

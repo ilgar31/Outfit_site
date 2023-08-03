@@ -101,3 +101,34 @@ class Basket(models.Model):
     class Meta:
         verbose_name = "Корзина"
         verbose_name_plural = "Корзина"
+
+
+class Purchase(models.Model):
+    id_user = models.IntegerField("ID пользователя", blank=True)
+    offer_number = models.CharField("Номер заказа", blank=True, max_length=50)
+    number = models.CharField("Мобильный номер", blank=True, max_length=50)
+    FIO = models.CharField("ФИО", blank=True, max_length=50)
+    tg = models.CharField("Телеграм", blank=True, max_length=50)
+    email = models.CharField("Почта", blank=True, max_length=50)
+    region = models.CharField("Регион", blank=True, max_length=50)
+    city = models.CharField("Город", blank=True, max_length=50)
+    delivery = models.CharField("Тип доставки", blank=True, max_length=50)
+    payment = models.CharField("Тип оплаты", blank=True, max_length=50)
+
+    def __str__(self):
+        return f"{self.id_user} -> {self.offer_number}"
+
+    class Meta:
+        verbose_name = "Покупка"
+        verbose_name_plural = "Покупки"
+
+
+class Items_purchase(models.Model):
+    purchase = models.ForeignKey(Purchase, on_delete=models.CASCADE, related_name="items")
+    id_item = models.IntegerField("ID товара", blank=True)
+    item_type_size = models.CharField("Тип размера (страна)", blank=True, max_length=10)
+    item_size = models.CharField("Размер", blank=True, max_length=10)
+    count = models.IntegerField("Количество", default=1, blank=True)
+
+    def __str__(self):
+        return f'{self.id_item}'
