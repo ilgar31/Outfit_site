@@ -1,0 +1,54 @@
+{% extends 'main/header.html' %}
+{% load static %}
+
+{% block link %}
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/offer.css' %}">
+{% endblock %}
+
+
+{% block title %}
+Ваш заказ
+{% endblock %}
+
+
+{% block content %}
+<div class="data">
+    <p class="offer_number">Заказ</p>
+    <p class="offer_number_value">#{{ data.offer_number }}</p>
+    <p class="date">Дата и время</p>
+    <p class="date_value">{{ data.date }}</p>
+    <p class="delivery">Пункт выдачи</p>
+    <p class="delivery_value">{{ data.city }}</p>
+</div>
+<div class="progress">
+    {% if data.step == "Принят" %}
+        <img src="{% static 'main/png/step.png' %}" class="first_step">
+    {% else %}
+        <img src="{% static 'main/png/first_step.png' %}" class="first_step">
+    {% endif %}
+    <p class="info_step">Принят</p>
+    <p class="next_step">&#10095;</p>
+    {% if data.step == "Готов к выдаче" %}
+        <img src="{% static 'main/png/step.png' %}" class="second_step">
+    {% else %}
+        <img src="{% static 'main/png/second_step.png' %}" class="second_step">
+    {% endif %}
+    <p class="info_step">Готов к выдаче</p>
+    <p class="next_step">&#10095;</p>
+    {% if data.step == "Выдан" %}
+        <img src="{% static 'main/png/step.png' %}" class="third_step">
+    {% else %}
+        <img src="{% static 'main/png/third_step.png' %}" class="third_step">
+    {% endif %}
+    <p class="info_step">Выдан</p>
+</div>
+<p class="info">Пройдите в пункт выдачи, чтобы получить заказ!</p>
+
+
+{% for i in data.items.all %}
+    <div class="item">
+
+    </div>
+{% endfor %}
+
+{% endblock %}

@@ -235,7 +235,6 @@ def purchase(request):
     for i in items:
         i['number_item'] = number
         number += 1
-    print(items)
     if request.method == "POST":
         new_purchase = Purchase()
         new_purchase.id_user = request.user.id
@@ -258,4 +257,20 @@ def purchase(request):
             item_purchase.item_size = i['size']
             item_purchase.count = i['count']
             item_purchase.save()
+        return redirect("thanks", new_purchase.offer_number)
     return render(request, 'main/purchase.html', {"items": items})
+
+
+def thanks(request, pk):
+    if request.user.id != Purchase.objects.get(offer_number=pk).id_user:
+        return HttpResponseNotFound("К сожалению это не ваш заказ")
+    items = Items.objects.all()[:6]
+    return render(request, 'main/thanks.html', {"items": items, "pk": pk})
+
+
+def offer(request, pk):
+    purchase_object = Purchase.objects.get(offer_number=pk)
+    if request.user.id != purchase_object.id_user:
+        return HttpResponseNotFound("К сожалению это не ваш заказ")
+    purchase_object.date = purchase_object.date.strftime("%d.%m.%Y %H:%M")
+    return render(request, 'main/offer.html', {"data": purchase_object})

@@ -1,0 +1,33 @@
+{% extends 'main/header.html' %}
+{% load static %}
+
+{% block link %}
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/thanks.css' %}">
+{% endblock %}
+
+
+{% block title %}
+Спасибо за заказ!
+{% endblock %}
+
+
+{% block content %}
+
+<p class="thanks_message">Спасибо за покупку!</p>
+<p class="idei">Вот еще идеи для Вас</p>
+<div class="items">
+    {% for i in items %}
+        <a href="{% url 'product_page' i.id %}" class="item_box">
+            <div style="display: block; height: 260px; line-height: 210px;">
+                <img src="{% static i.images.all.0 %}" class="item_img" draggable="false">
+            </div>
+            <p class="item_name">{{ i.name }}</p>
+            <p class="item_price">{{ i.cost }} руб</p>
+        </a>
+    {% endfor %}
+</div>
+<div class="buttons">
+    <a href="{% url 'home' %}" class="home_button2">Главная</a>
+    <a href="{% url 'offer' pk %}" class="offer_button">Перейти к заказу</a>
+</div>
+{% endblock %}

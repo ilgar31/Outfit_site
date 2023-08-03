@@ -5,8 +5,7 @@ items {
     grid-column-gap: 40px;
     grid-row-gap: 40px;
     justify-content: center;
-    margin-left: 30px;
-    margin-right: 30px;
+    margin-left: 5px;
 }
 
 .item_img{
