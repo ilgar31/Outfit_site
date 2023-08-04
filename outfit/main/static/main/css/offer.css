@@ -100,3 +100,88 @@
     font-family: Inter, sans-serif;
 }
 
+.items {
+    position: absolute;
+    left: 50%;
+    margin-left: -850px;
+}
+
+.item{
+    height: 150px;
+    width: 1500px;
+}
+
+.img_box{
+    float: left;
+    width:125px;
+    height:125px;
+    line-height: 125px;
+    margin-left: 60px;
+}
+
+.item_img {
+    max-width: 120px;
+    max-height:120px;
+    object-fit: contain;
+    vertical-align: middle;
+    border-radius: 20px;
+    vertical-align: middle;
+}
+
+.item_name{
+    font-size: 19px;
+    font-family: Inter, sans-serif;
+    float:left;
+    margin-left: 80px;
+    width: 350px;
+}
+
+.item_type_size{
+    font-size: 19px;
+    font-family: Inter, sans-serif;
+    float:left;
+    margin-left: 80px;
+    width: 140px;
+}
+
+.item_cost{
+    font-size: 19px;
+    font-family: Inter, sans-serif;
+    float:left;
+    margin-left: 80px;
+    width: 110px;
+}
+
+.sale{
+    font-size: 19px;
+    font-family: Inter, sans-serif;
+    float:left;
+    margin-left: 80px;
+    width: 50px;
+}
+
+.count{
+    font-size: 19px;
+    font-family: Inter, sans-serif;
+    float:left;
+    margin-left: 80px;
+    width: 60px;
+}
+
+.final_cost{
+    font-size: 19px;
+    font-family: Inter, sans-serif;
+    float:left;
+    margin-left: 80px;
+    width: 120px;
+}
+
+.money{
+    text-align: center;
+    font-size: 26px;
+    font-family: Inter, sans-serif;
+    margin-top: 20px;
+    margin-left: 100px;
+    margin-bottom: 50px;
+}
+

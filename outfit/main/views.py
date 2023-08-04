@@ -54,7 +54,8 @@ def profile(request, pk):
     if request.method == "POST":
         logout(request)
         return redirect("home")
-    return render(request, "main/profile.html", {"favorites_items": favorites_items})
+    purchase_offers = Purchase.objects.filter(id_user=pk)
+    return render(request, "main/profile.html", {"favorites_items": favorites_items, "purchase_offers": purchase_offers})
 
 
 def profile_change(request):
@@ -273,4 +274,17 @@ def offer(request, pk):
     if request.user.id != purchase_object.id_user:
         return HttpResponseNotFound("К сожалению это не ваш заказ")
     purchase_object.date = purchase_object.date.strftime("%d.%m.%Y %H:%M")
-    return render(request, 'main/offer.html', {"data": purchase_object})
+    items = []
+    index2 = 0
+    cost = 0
+    for i in purchase_object.items.all():
+        data = dict()
+        data['item'] = Items.objects.get(id=i.id_item)
+        data["type_size"] = purchase_object.items.all()[index2].item_type_size
+        data["size"] = purchase_object.items.all()[index2].item_size
+        data['count'] = purchase_object.items.all()[index2].count
+        data['final_cost'] = data["item"].cost * data['count']
+        cost += data['final_cost']
+        items.append(data)
+        index2 += 1
+    return render(request, 'main/offer.html', {"data": purchase_object, "items": items, "cost": cost})

@@ -5,6 +5,11 @@
 <link rel="stylesheet" type="text/css" href="{% static 'main/css/profile.css' %}">
 {% endblock %}
 
+{% block script %}
+<script src="{% static 'main/js/profile.js' %}" defer></script>
+{% endblock %}
+
+
 {% block title %}
 Профиль
 {% endblock %}
@@ -31,11 +36,11 @@
 </div>
 
 <div class="user_items">
-    <button class="items_far"><p>Избранное</p></button>
-    <button class="items_pur"><p>Купленное</p></button>
+    <button class="items_far" onclick="favourites()"><p>Избранное</p></button>
+    <button class="items_pur" onclick="purchase()"><p>Купленное</p></button>
 </div>
 
-<div class="favorites">
+<div class="favorites" id="favourites">
     {% for i in favorites_items %}
         <a href="{% url 'product_page' i.id %}" class="item_box">
             <div style="display: block; height: 260px; line-height: 210px;">
@@ -43,6 +48,14 @@
             </div>
             <p class="item_name">{{ i.name }}</p>
             <p class="item_price">{{ i.cost }} руб</p>
+        </a>
+    {% endfor %}
+</div>
+
+<div class="purchase" style="display: none;" id="purchase">
+    {% for i in purchase_offers %}
+        <a href="{% url 'offer' i.offer_number %}" class="offer_box">
+            <p class="item_price">#{{ i }}</p>
         </a>
     {% endfor %}
 </div>

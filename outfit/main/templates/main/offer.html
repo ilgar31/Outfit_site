@@ -44,11 +44,24 @@
 </div>
 <p class="info">Пройдите в пункт выдачи, чтобы получить заказ!</p>
 
+<div class="items">
+    {% for i in items %}
+        <div class="item">
+            <div class="img_box">
+                <img src="{% static i.item.images.all.0 %}" class="item_img" draggable="false">
+            </div>
+            <div style="float:left; margin-top: 35px;">
+                <p class="item_name">{{ i.item.name }}</p>
+                <p class="item_type_size">Размер {{ i.type_size }}-{{ i.size }}</p>
+                <p class="item_cost">{{ i.item.cost }}руб</p>
+                <p class="sale">0%</p>
+                <p class="count">{{ i.count }} шт</p>
+                <p class="final_cost">{{ i.final_cost }}руб</p>
+            </div>
+        </div>
+    {% endfor %}
+    <p class="money">Итого: {{ cost }}руб</p>
+</div>
 
-{% for i in data.items.all %}
-    <div class="item">
-
-    </div>
-{% endfor %}
 
 {% endblock %}
