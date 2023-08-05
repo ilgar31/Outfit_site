@@ -53,9 +53,27 @@
 </div>
 
 <div class="purchase" style="display: none;" id="purchase">
-    {% for i in purchase_offers %}
-        <a href="{% url 'offer' i.offer_number %}" class="offer_box">
-            <p class="item_price">#{{ i }}</p>
+    {% for i in data %}
+        <a href="{% url 'offer' i.offer.offer_number %}" class="offer_box">
+            <div style="display: inline-block; margin-top: 25px;">
+                <p class="offer">Заказ</p>
+                <p class="offer_number">#{{ i.offer.offer_number }}</p>
+            </div>
+            <div class="images">
+                {% for i in i.items %}
+                    <div style="line-height: 120px;">
+                        {% if i == "more" %}
+                            <img src="{% static 'main/png/more.png' %}" draggable="false" class="img_item" style="max-width: 39px; max-height: 39px; margin-left: 40px;">
+                        {% else %}
+                            <img src="{% static i %}" draggable="false" class="img_item">
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="step_box">
+                <img src="{% static 'main/png/step.png' %}" class="step">
+                <p class="step_info">{{ i.offer.step }}</p>
+            </div>
         </a>
     {% endfor %}
 </div>

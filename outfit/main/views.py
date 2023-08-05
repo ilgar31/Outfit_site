@@ -54,8 +54,20 @@ def profile(request, pk):
     if request.method == "POST":
         logout(request)
         return redirect("home")
-    purchase_offers = Purchase.objects.filter(id_user=pk)
-    return render(request, "main/profile.html", {"favorites_items": favorites_items, "purchase_offers": purchase_offers})
+    data = []
+    for offer in Purchase.objects.filter(id_user=pk):
+        items = []
+        for index, i in enumerate(offer.items.all()):
+            if index == 3:
+                items[2] = "more"
+                break
+            items.append(Items.objects.get(id=i.id_item).images.all()[0])
+        data2 = dict()
+        data2['items'] = items
+        data2['offer'] = offer
+        data.append(data2)
+    print(data)
+    return render(request, "main/profile.html", {"favorites_items": favorites_items, "data": data})
 
 
 def profile_change(request):

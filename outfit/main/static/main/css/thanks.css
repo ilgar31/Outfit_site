@@ -18,7 +18,7 @@
     display: grid;
     margin-top: 80px;
     grid-column-gap: 40px;
-      grid-template-columns: repeat(auto-fill, minmax(270px, 270px));
+    grid-template-columns: repeat(auto-fill, minmax(270px, 270px));
     grid-row-gap: 60px;
     justify-content: center;
     margin-left: 5px;
