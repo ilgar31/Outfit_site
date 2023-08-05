@@ -2,10 +2,11 @@ from django.shortcuts import render, redirect
 from .forms import UserRegistrationForm, ProfileForm
 from django.contrib.auth import authenticate, login, logout
 from django.forms import TextInput
-from .models import Items, Favorites, Basket, Profile, Purchase, Items_purchase
+from .models import Items, Favorites, Basket, Profile, Purchase, Items_purchase, Watched
 from django.http import JsonResponse, HttpResponseNotFound
 import json
 import random
+import datetime
 
 
 def index(request):
@@ -66,7 +67,6 @@ def profile(request, pk):
         data2['items'] = items
         data2['offer'] = offer
         data.append(data2)
-    print(data)
     return render(request, "main/profile.html", {"favorites_items": favorites_items, "data": data})
 
 
@@ -86,13 +86,20 @@ def profile_change(request):
                 pass
 
             profile_obj.save()
-            return redirect("profile")
+            return redirect("profile", request.user.id)
     else:
         profile_form = ProfileForm()
         profile_form.fields["user_name"].initial = request.user.profile.user_name
         profile_form.fields["user_surname"].initial = request.user.profile.user_surname
-        profile_form.fields["gender"].initial = request.user.profile.gender
-        profile_form.fields["birthday"].initial = request.user.profile.birthday
+        if request.user.profile.gender:
+            profile_form.fields["gender"].initial = request.user.profile.gender
+        else:
+            profile_form.fields["gender"].initial = "M"
+
+        if request.user.profile.birthday:
+            profile_form.fields["birthday"].initial = request.user.profile.birthday
+        else:
+            profile_form.fields["birthday"].initial = datetime.datetime.now()
         profile_form.fields["country"].initial = request.user.profile.country
 
     return render(request, "main/profile_change.html", {"profile_form": profile_form})
@@ -113,6 +120,21 @@ colors = {"Красный": "rgb(255, 0, 0)", "Белый": "rgb(255, 255, 255)"
 
 
 def product_page(request, pk):
+    watched_items = []
+    if request.user.is_authenticated:
+        watched_items = Watched.objects.filter(profile=request.user.profile)
+        if len(watched_items) == 7:
+            watched_items[0].delete()
+            watched_items = watched_items[1:]
+
+        watched_items = list(map(lambda x: Items.objects.get(id=x.item_id), watched_items))[::-1]
+        if len(Watched.objects.filter(item_id=pk)) == 1:
+            Watched.objects.get(item_id=pk).delete()
+        watched = Watched()
+        watched.profile = request.user.profile
+        watched.item_id = pk
+        watched.save()
+
     if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest' and request.POST.get("type_POST") == "basket":
         #Проверка
         item_in_basket = False
@@ -134,7 +156,6 @@ def product_page(request, pk):
                 product_add_to_basket.item_size = request.POST.get("EU_size")
             item_in_basket = True
             product_add_to_basket.save()
-
 
     item = Items.objects.get(id=pk)
     item.cost = beautiful_price(item.cost)
@@ -176,7 +197,7 @@ def product_page(request, pk):
         icon = "/static/main/png/heart_icon1.svg"
     else:
         icon = "/static/main/png/heart_icon.svg"
-    return render(request, "main/product_page.html", {"item": item, "images_count": range(len(item.images.all())), "icon": icon, "types_size": enumerate(list(types_size)), "sizes": sizes, "other_colors": other_colors})
+    return render(request, "main/product_page.html", {"item": item, "images_count": range(len(item.images.all())), "icon": icon, "types_size": enumerate(list(types_size)), "sizes": sizes, "other_colors": other_colors, "watched_items": watched_items})
 
 
 def search_results(request):

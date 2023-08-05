@@ -1,7 +1,6 @@
 from django.contrib import admin
-from .models import Profile, Items, Item_images, Favorites, Item_sizes, Basket, Purchase, Items_purchase
+from .models import Profile, Items, Item_images, Favorites, Item_sizes, Basket, Purchase, Items_purchase, Watched
 
-admin.site.register(Profile)
 admin.site.register(Favorites)
 admin.site.register(Basket)
 
@@ -20,6 +19,11 @@ class Item_sizesInline(admin.TabularInline):
     model = Item_sizes
 
 
+class WatchedInline(admin.TabularInline):
+    fk_name = 'profile'
+    model = Watched
+
+
 @admin.register(Purchase)
 class PurchaseAdmin(admin.ModelAdmin):
     inlines = [Items_purchaseInline, ]
@@ -28,3 +32,8 @@ class PurchaseAdmin(admin.ModelAdmin):
 @admin.register(Items)
 class ItemsAdmin(admin.ModelAdmin):
     inlines = [Item_imagesInline, Item_sizesInline]
+
+
+@admin.register(Profile)
+class ProfileAdmin(admin.ModelAdmin):
+    inlines = [WatchedInline, ]

@@ -13,7 +13,6 @@
 Главная страница
 {% endblock %}
 
-
 {% block content %}
 <form id="buy_form">
     {% csrf_token %}
@@ -107,5 +106,32 @@
         </div>
     </div>
 </form>
+
+<div class="description">
+    <p class="d_title">Описание</p>
+    {% if item.description %}
+        <p class="item_info">{{ item.description }}</p>
+    {% else %}
+        <p class="item_info">Отсутствует</p>
+    {% endif %}
+</div>
+
+{% if request.user.is_authenticated %}
+    <div class="watched">
+        <p style="margin-left: 100px;">Ранее Вы смотрели</p>
+        <items>
+            {% for i in watched_items %}
+                <a href="{% url 'product_page' i.id %}" class="item_box1">
+                    <div style="display: block; height: 260px; line-height: 210px;">
+                        <img src="{% static i.images.all.0 %}" class="item_img1" draggable="false">
+                    </div>
+                    <p class="item_name1">{{ i.name }}</p>
+                    <p class="item_price1">{{ i.cost }} руб</p>
+                </a>
+            {% endfor %}
+        </items>
+    </div>
+{% endif %}
+
 
 {% endblock %}
