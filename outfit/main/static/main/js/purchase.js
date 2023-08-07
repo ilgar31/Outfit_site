@@ -17,3 +17,55 @@ function showItem(n) {
   console.log(itemIndex)
   items[itemIndex].style.display = "block";
 }
+
+function minuscount(n) {
+    const count = document.getElementById("count" + n).innerHTML;
+    if (count == 1) {
+        return;
+    }
+        $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            "csrfmiddlewaretoken": csrf,
+            "id": n,
+            "type": "change_count",
+            "operation": "minus",
+        },
+        success: (res)=> {
+            document.getElementById("count" + n).innerHTML = `${res.item_count}`
+            var items = document.getElementsByClassName("cost");
+            for (i = 0; i < items.length; i++) {
+              items[i].innerHTML = `${res.cost}руб`;
+            }
+        },
+        error: (err)=> {
+            console.log("error")
+        }
+    })
+}
+
+function pluscount(n) {
+    const count = document.getElementById("count" + n).innerHTML;
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            "csrfmiddlewaretoken": csrf,
+            "id": n,
+            "type": "change_count",
+            "operation": "plus",
+        },
+        success: (res)=> {
+            document.getElementById("count" + n).innerHTML = `${res.item_count}`
+            var items = document.getElementsByClassName("cost");
+            for (i = 0; i < items.length; i++) {
+              items[i].innerHTML = `${res.cost}руб`;
+            }
+        },
+        error: (err)=> {
+            console.log(err)
+            console.log("error")
+        }
+    })
+}

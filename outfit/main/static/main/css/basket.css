@@ -96,7 +96,7 @@ items {
 
 .result_money {
     width: 400px;
-    height: 200px;
+    height: 220px;
     background-color: #F4F4F4;
     border-radius: 30px;
     top: 300px;
@@ -138,7 +138,7 @@ items {
     float: left;
     margin-left: 50px;
     font-size: 23px;
-    margin-top: 35px;
+    margin-top: 50px;
     font-family: Inter, sans-serif;
     position: absolute;
 }
@@ -147,7 +147,7 @@ items {
     float: right;
     margin-right: 50px;
     font-size: 23px;
-    margin-top: 5px;
+    margin-top: 20px;
     font-family: Inter, sans-serif;
 }
 
@@ -214,70 +214,43 @@ items {
     width: 130px;
 }
 
-.promo {
-    width: 400px;
-    height: 200px;
-    border-radius: 30px;
-    top: 540px;
-    position: absolute;
-    left: 100%;
-    margin-left: -500px;
-}
-
-.promo p {
-    font-size: 20px;
-    margin-left: 30px;
-    font-family: Inter, sans-serif;
-}
-
-.promo input {
-    width: 325px;
-    margin-left: 25px;
-    height: 30px;
-    background-color: #F4F4F4;
-    border-radius: 30px;
-    border: 0;
-    font-family: Inter, sans-serif;
-    padding-left: 25px;
-}
-
-.promo input:hover{
-    -webkit-box-shadow:inset 0px 0px 0px 2px #C64F00;
-    -moz-box-shadow:inset 0px 0px 0px 2px #C64F00;
-    box-shadow:inset 0px 0px 0px 2px #C64F00;
-}
-
-.promo input:focus {
-    outline:none;
-    -webkit-box-shadow:inset 0px 0px 0px 2px #C64F00;
-    -moz-box-shadow:inset 0px 0px 0px 2px #C64F00;
-    box-shadow:inset 0px 0px 0px 2px #C64F00;
-}
-
-.promo button {
-    width: 150px;
-    background-color: #C64F00;
-    border-radius: 30px;
-    border: 0;
-    color: white;
-    margin-left: 125px;
-    height: 30px;
-    margin-top: 20px;
-    font-size: 16px;
-    font-family: Inter, sans-serif;
-    cursor: pointer;
-}
-
 .offer_button {
     width: 320px;
     height: 55px;
     border-radius: 30px;
-    top: 790px;
-    position: absolute;
-    left: 100%;
-    margin-left: -460px;
     border: 0;
+    margin-top: 15px;
     font-size: 25px;
     font-family: Inter, sans-serif;
     cursor: pointer;
+    margin-bottom: 80px;
+}
+
+
+.offer {
+    margin-top: 180px;
+    text-align: center;
+}
+
+.offer label {
+    color: #939393;
+    font-size: 25px;
+    font-family: Inter, sans-serif;
+}
+
+.offer label:hover {
+    color: #5B5B5B;
+    font-size: 25px;
+    font-family: Inter, sans-serif;
+}
+
+.offer input {
+    margin-bottom: 15px;
+}
+
+.offer_button:hover {
+    transition: 0.5s;
+    -webkit-box-shadow:inset 0px 0px 0px 3px #C64F00;
+    -moz-box-shadow:inset 0px 0px 0px 3px #C64F00;
+    box-shadow:inset 0px 0px 0px 3px #C64F00;
 }

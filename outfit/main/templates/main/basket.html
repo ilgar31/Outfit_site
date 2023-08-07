@@ -52,12 +52,13 @@
             <p class="cost_value">{{ cost }} руб</p>
         </div>
     </div>
-    <div class="promo">
-        <p>Промокод</p>
-        <input type="text">
-        <button>Применить</button>
+    <div class="offer">
+        <input type="checkbox" id="agreement" name="agreement" value="1">
+        <label for="agreement">Даю согласие ООО SunClub на получение информации о специальных предложениях</label><br>
+        <input type="checkbox" id="agreement2" name="agreement1" value="2">
+        <label for="agreement2">Я принимаю пользовательское соглашение и политику конфиденциальности</label><br>
+        <button onclick="location.href='{% url 'purchase' %}'" class="offer_button">Оформить заказ</button>
     </div>
-    <button onclick="location.href='{% url 'purchase' %}'" class="offer_button">Оформить заказ</button>
 
 {% else %}
 

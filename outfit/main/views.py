@@ -264,35 +264,56 @@ def basket(request):
 
 
 def purchase(request):
-    items = list(map(lambda x: {"item": Items.objects.get(id=x.id_item), "type_size": x.item_type_size, "size": x.item_size, "count": x.count}, Basket.objects.filter(id_user=request.user.id)))
+    items = list(map(lambda i: {"item": Items.objects.get(id=i.id_item), "basket": i}, Basket.objects.filter(id_user=request.user.id)))
     number = 0
+    cost = 0
     for i in items:
         i['number_item'] = number
         number += 1
-    if request.method == "POST":
-        new_purchase = Purchase()
-        new_purchase.id_user = request.user.id
-        new_purchase.offer_number = random.randint(100001, 999999)
-        new_purchase.number = request.POST.get("number")
-        new_purchase.FIO = request.POST.get("FIO")
-        new_purchase.tg = request.POST.get("tg")
-        new_purchase.email = request.POST.get("email")
-        new_purchase.region = request.POST.get("region")
-        new_purchase.city = request.POST.get("city")
-        new_purchase.delivery = request.POST.get("delivery")
-        new_purchase.payment = request.POST.get("payment")
-        new_purchase.save()
+        cost += i['item'].cost * i['basket'].count
 
-        for i in items:
-            item_purchase = Items_purchase()
-            item_purchase.purchase = new_purchase
-            item_purchase.id_item = i['item'].id
-            item_purchase.item_type_size = i['type_size']
-            item_purchase.item_size = i['size']
-            item_purchase.count = i['count']
-            item_purchase.save()
-        return redirect("thanks", new_purchase.offer_number)
-    return render(request, 'main/purchase.html', {"items": items})
+    if request.method == "POST":
+        if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest' and request.POST.get("type") == 'change_count':
+            item = Basket.objects.get(id=request.POST.get("id"))
+            item_count = item.count
+
+            if request.POST.get("operation") == "plus":
+                item_count += 1
+                item.count += 1
+                item.save()
+                cost += Items.objects.get(id=item.id_item).cost
+            else:
+                item_count -= 1
+                item.count -= 1
+                item.save()
+                cost -= Items.objects.get(id=item.id_item).cost
+            print({"cost": cost, "item_count": item_count})
+            return JsonResponse({"cost": cost, "item_count": item_count})
+        else:
+            new_purchase = Purchase()
+            new_purchase.id_user = request.user.id
+            new_purchase.offer_number = random.randint(100001, 999999)
+            new_purchase.number = request.POST.get("number")
+            new_purchase.FIO = request.POST.get("FIO")
+            new_purchase.tg = request.POST.get("tg")
+            new_purchase.email = request.POST.get("email")
+            new_purchase.region = request.POST.get("region")
+            new_purchase.city = request.POST.get("city")
+            new_purchase.delivery = request.POST.get("delivery")
+            new_purchase.payment = request.POST.get("payment")
+            new_purchase.save()
+
+            for i in items:
+                item_purchase = Items_purchase()
+                item_purchase.purchase = new_purchase
+                item_purchase.id_item = i['item'].id
+                item_purchase.item_type_size = i['basket'].item_type_size
+                item_purchase.item_size = i['basket'].item_size
+                item_purchase.count = i['basket'].count
+                item_purchase.save()
+            return redirect("thanks", new_purchase.offer_number)
+
+    return render(request, 'main/purchase.html', {"items": items, "cost": cost})
 
 
 def thanks(request, pk):

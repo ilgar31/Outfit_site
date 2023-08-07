@@ -63,10 +63,18 @@
             <div class="item_price">
                 <p style="vertical-align: middle;">{{ item.item.cost }} руб</p>
             </div>
-            <div class="item_size"><p style="margin-top: 3px;">{{ item.type_size }}-{{ item.size }}</p></div>
+            <div class="item_size"><p style="margin-top: 3px;">{{ item.basket.item_type_size }}-{{ item.basket.item_size }}</p></div>
+            <div class="dots">
+                <span class="dot" onclick="plusItem(-1)"><img src="{% static 'main/png/left.png' %}" style="vertical-align: middle;"></span>
+                <span class="dot" onclick="plusItem(1)"><img src="{% static 'main/png/right.png' %}" style="vertical-align: middle;"></span>
+            </div>
+            <div class="change_count">
+                <span class="minus" onclick="minuscount({{ item.basket.id }})">-</span>
+                <p class="count" id="count{{item.basket.id}}">{{ item.basket.count }}</p>
+                <span class="plus" onclick="pluscount({{ item.basket.id}})">+</span>
+            </div>
             <div class="line"></div>
-            <span class="dot" onclick="plusItem(-1)"><p style="margin-top: 1px; font-size: 25px;">&#10094;</p></span>
-            <span class="dot" onclick="plusItem(1)"><p style="margin-top: 1px; font-size: 25px;">&#10095;</p></span>
+            <p class="cost" id="cost">{{ cost }}руб</p>
         </div>
     {% else %}
         <div class="items_box" style="display: none;">
@@ -77,11 +85,21 @@
             <div class="item_price">
                 <p style="vertical-align: middle;">{{ item.item.cost }} руб</p>
             </div>
-            <div class="item_size"><p style="margin-top: 3px;">{{ item.type_size }}-{{ item.size }}</p></div>
+            <div class="item_size"><p style="margin-top: 3px;">{{ item.basket.item_type_size }}-{{ item.basket.item_size }}</p></div>
+            <div class="dots">
+                <span class="dot" onclick="plusItem(-1)"><img src="{% static 'main/png/left.png' %}" style="vertical-align: middle;"></span>
+                <span class="dot" onclick="plusItem(1)"><img src="{% static 'main/png/right.png' %}" style="vertical-align: middle;"></span>
+            </div>
+            <div class="change_count">
+                <span class="minus" onclick="minuscount({{ item.basket.id }})">-</span>
+                <p class="count" id="count{{item.basket.id}}">{{ item.basket.count }}</p>
+                <span class="plus" onclick="pluscount({{ item.basket.id}})">+</span>
+            </div>
             <div class="line"></div>
-            <span class="dot" onclick="plusItem(-1)"><p style="margin-top: 1px; font-size: 25px;">&#10094;</p></span>
-            <span class="dot" onclick="plusItem(1)"><p style="margin-top: 1px; font-size: 25px;">&#10095;</p></span>
+            <p class="cost">{{ cost }}руб</p>
         </div>
+        <p class="have">У меня есть промокод</p>
+        <input type="text" class="promo" placeholder="Ввести  промокод">
     {% endif %}
 {% endfor %}
 {% endblock %}
