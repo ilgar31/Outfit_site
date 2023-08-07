@@ -296,6 +296,8 @@ def purchase(request):
 
 
 def thanks(request, pk):
+    for i in Basket.objects.filter(id_user=request.user.id):
+        i.delete()
     if request.user.id != Purchase.objects.get(offer_number=pk).id_user:
         return HttpResponseNotFound("К сожалению это не ваш заказ")
     items = Items.objects.all()[:6]
