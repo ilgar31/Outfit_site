@@ -1,0 +1,11 @@
+.block_message {
+    position: absolute;
+    top: 45%;
+    width: 100%;
+    text-align: center;
+}
+
+.text {
+    font-family: Inter, sans-serif;
+    font-size: 27px;
+}

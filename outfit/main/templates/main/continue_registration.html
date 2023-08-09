@@ -1,0 +1,20 @@
+{% extends 'main/header.html' %}
+{% load static %}
+
+{% block link %}
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/continue_registration.css' %}">
+{% endblock %}
+
+
+{% block title %}
+Подтвердите регистрацию
+{% endblock %}
+
+
+{% block content %}
+
+<div class="block_message">
+    <p class="text">Пожалуйста, подтвердите свой адрес электронной почты, чтобы завершить регистрацию</p>
+</div>
+
+{% endblock %}

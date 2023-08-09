@@ -48,7 +48,7 @@ def registration(request):
                 mail_subject, message, to=[to_email]
             )
             email.send()
-            return HttpResponse('Please confirm your email address to complete the registration')
+            return render(request, 'main/continue_registration.html')
         else:
             user_form = UserRegistrationForm()
             error = True
