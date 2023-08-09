@@ -13,5 +13,6 @@ urlpatterns = [
     path("basket", views.basket, name='basket'),
     path("purchase/thanks/<int:pk>", views.thanks, name='thanks'),
     path("purchase", views.purchase, name='purchase'),
-    path("offer/<int:pk>", views.offer, name='offer')
+    path("offer/<int:pk>", views.offer, name='offer'),
+    path('activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/', views.activate, name='activate'),
 ]
