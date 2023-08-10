@@ -295,11 +295,27 @@ def search_results(request):
                         item_watched[i.item_id] = 1
                     else:
                         item_watched[i.item_id] += 1
-
+            items_top = list(map(lambda x: x[0], sorted(item_watched.items(), key=lambda x: x[1], reverse=True)))
+            data2 = []
+            for i in items_top:
+                element = {
+                    'pk': i,
+                    'image': '/static/' + str(Items.objects.get(id=i).images.all()[0]),
+                    'url': "/product/" + str(i)
+                }
+                data2.append(element)
 
             #---------------------------------------------
 
-            return JsonResponse({"items_for_you": data[:5], "history": history})
+            return JsonResponse({"items_for_you": data[:5], "history": history, "items_top": data2, "delete_search": '/static/main/png/delete_search.png'})
+    return JsonResponse({})
+
+
+def delete_search(request):
+    if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+        text = request.POST.get('search_text')
+        Search_history.objects.get(profile=request.user.profile, text=text).delete()
+        return JsonResponse({})
     return JsonResponse({})
 
 
