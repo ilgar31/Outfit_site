@@ -1,0 +1,84 @@
+.block_message {
+    position: absolute;
+    top: 40%;
+    width: 80%;
+    left: 8%;
+    text-align: center;
+    border: solid 20px #C64F00;
+    padding: 2% 2% 2% 2%;
+    border-radius: 30px;
+    background-color: #f5e6dc;
+}
+
+.text {
+    font-family: Inter, sans-serif;
+    font-size: 27px;
+}
+
+.container {
+    width: 70%;
+    left: 15%;
+    top: 70%;
+    position: relative;
+    text-align: center;
+}
+
+.button_div {
+    width: 30%;
+    height: 40px;
+    background-color: #C64F00;
+    position: absolute;
+    bottom: 2.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+    transition: 0.5s;
+    font-size: 18px;
+}
+
+.button_div:hover {
+    margin-left: -6px;
+    bottom: 0;
+    width: 33%;
+    height: 45px;
+    transition: 0.5s;
+    font-size: 20px;
+}
+
+.change_button {
+    font-family: Inter, sans-serif;
+    color: white;
+    text-decoration: none;
+}
+
+.change_button2 {
+    width: 30%;
+    float: right;
+    font-family: Inter, sans-serif;
+    color: #C64F00;
+    text-decoration: none;
+}
+
+.button_div2 {
+    width: 30%;
+    height: 40px;
+    position: absolute;
+    bottom: 2.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+    box-shadow: inset 0px 0px 0px 4px #C64F00;
+    transition: 0.5s;
+    font-size: 18px;
+}
+
+.button_div2:hover {
+    margin-left: -6px;
+    bottom: 0;
+    width: 33%;
+    height: 45px;
+    transition: 0.5s;
+    font-size: 20px;
+}

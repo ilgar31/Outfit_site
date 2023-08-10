@@ -43,7 +43,6 @@ def registration(request):
                 'token': account_activation_token.make_token(new_user),
             })
             to_email = request.POST.get('username')
-            print(message, to_email)
             email = EmailMessage(
                 mail_subject, message, to=[to_email]
             )
@@ -69,7 +68,7 @@ def activate(request, uidb64, token):
         user.is_active = True
         login(request, user)
         user.save()
-        return redirect("profile", user.id)
+        return render(request, 'main/successful.html')
     else:
         return HttpResponse('Activation link is invalid!')
 
@@ -329,7 +328,6 @@ def purchase(request):
                 item.count -= 1
                 item.save()
                 cost -= Items.objects.get(id=item.id_item).cost
-            print({"cost": cost, "item_count": item_count})
             return JsonResponse({"cost": cost, "item_count": item_count})
         else:
             new_purchase = Purchase()

@@ -1,0 +1,25 @@
+{% extends 'main/header.html' %}
+{% load static %}
+
+{% block link %}
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/successful.css' %}">
+{% endblock %}
+
+
+{% block title %}
+Успешно
+{% endblock %}
+
+
+{% block content %}
+
+<div class="block_message">
+    <p class="text">Вы успешно зарегистрировались</p>
+</div>
+
+<div class="container">
+    <a href="{% url 'home' %}" class="change_button"><div class="button_div"><p>Главная</p></div></a>
+    <a href="{% url 'profile' request.user.id %}" class="change_button2"><div class="button_div2"><p>Профиль</p></div></a>
+</div>
+
+{% endblock %}

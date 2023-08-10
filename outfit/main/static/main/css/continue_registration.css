@@ -1,8 +1,13 @@
 .block_message {
     position: absolute;
     top: 45%;
-    width: 100%;
+    width: 80%;
+    left: 8%;
     text-align: center;
+    border: solid 20px #C64F00;
+    padding: 2% 2% 2% 2%;
+    border-radius: 30px;
+    background-color: #f5e6dc;
 }
 
 .text {
