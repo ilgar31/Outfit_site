@@ -274,6 +274,7 @@ def search_results(request):
             #-----------------------------
 
             # Недавние происковые запросы
+            history = []
             if request.user.is_authenticated:
                 searches = request.user.profile.history.all()[::-1]
                 history = []
