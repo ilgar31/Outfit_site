@@ -26,10 +26,8 @@
     </a>
 
     <div class="search_box">
-        <form id="search_form">
-            {% csrf_token %}
-            <input id="search_input" class="search_box_input" placeholder="Найти..." type="text">
-        </form>
+        {% csrf_token %}
+        <input id="search_input" class="search_box_input" placeholder="Найти..." type="text" autocomplete="off">
         <div id="results_box" class="result_card not-visible"></div>
     </div>
 

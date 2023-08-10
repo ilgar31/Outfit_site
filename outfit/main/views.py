@@ -243,15 +243,31 @@ def product_page(request, pk):
 
 def search_results(request):
     if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
-        item = request.POST.get('item')
-        search_items = Items.objects.filter(name__icontains=item)
-        # users = Profile.objects.all()
-        # search_users = []
-        # for i in range(len(users)):
-        #     search_users.append(users[i].user.username)
-        if len(search_items) > 0 and len(item.replace(" ", '')) > 0:
+        if request.POST.get('type') == "elements":
+            item = request.POST.get('item')
+            search_items = Items.objects.filter(name__icontains=item)
+            # users = Profile.objects.all()
+            # search_users = []
+            # for i in range(len(users)):
+            #     search_users.append(users[i].user.username)
+            if len(search_items) > 0 and len(item.replace(" ", '')) > 0:
+                data = []
+                for i in search_items:
+                    element = {
+                        'pk': i.pk,
+                        'name': i.name,
+                        'image': '/static/' + str(i.images.all()[0]),
+                        'url': "/product/" + str(i.pk)
+                    }
+                    data.append(element)
+                res = data
+            else:
+                res = "Товары не найдены"
+            return JsonResponse({"item": res})
+        else:
+            items = Items.objects.all()
             data = []
-            for i in search_items:
+            for i in items:
                 element = {
                     'pk': i.pk,
                     'name': i.name,
@@ -259,11 +275,28 @@ def search_results(request):
                     'url': "/product/" + str(i.pk)
                 }
                 data.append(element)
-            res = data
-        else:
-            res = "Товар не найден"
-        return JsonResponse({"item": res})
+            random.shuffle(data)
+            return JsonResponse({"items": data[:5]})
     return JsonResponse({})
+
+
+def search_page(request):
+    if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+        item = request.POST.get('item')
+        search_items = Items.objects.filter(name__icontains=item)
+        if len(item.replace(" ", '').replace("/", '')) > 0:
+            res = True
+        else:
+            res = False
+        return JsonResponse({"url": f'/goods/{item.replace("/", "")}', "bool": res})
+    return JsonResponse({})
+
+
+def search_goods(request, text):
+    # if request.user.is_authenticated:
+    #     request.user.profile.
+    items = Items.objects.filter(name__icontains=text)
+    return render(request, "main/search_goods.html", {"items": items, "text": text, "count": len(items)})
 
 
 def basket(request):

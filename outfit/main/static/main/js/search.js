@@ -1,5 +1,4 @@
 const url = window.location.href
-const searchForm = document.getElementById("search_form")
 const searchInput = document.getElementById("search_input")
 const resultsBox = document.getElementById("results_box")
 
@@ -13,6 +12,7 @@ const sendSearchData = (item) => {
         data: {
             "csrfmiddlewaretoken": csrf,
             'item': item,
+            "type": "elements",
         },
         success: (res)=> {
             console.log(res.item)
@@ -49,6 +49,62 @@ const sendSearchData = (item) => {
     })
 }
 
+const searchPage = (item) => {
+    $.ajax({
+        type: "POST",
+        url: "/search_page/",
+        data: {
+            "csrfmiddlewaretoken": csrf,
+            'item': item,
+        },
+        success: (res)=> {
+            console.log(res.items)
+            if (res.bool) {
+                window.location.replace(res.url)
+            }
+        },
+        error: (err)=> {
+            console.log(err)
+        }
+    })
+}
+
+
+const showData = () => {
+    $.ajax({
+        type: "POST",
+        url: '/search/',
+        data: {
+            "csrfmiddlewaretoken": csrf,
+            'type': 'data',
+        },
+        success: (res)=> {
+            console.log(res.items)
+            const data = res.items
+            if (Array.isArray(data)) {
+                resultsBox.innerHTML = ''
+                data.forEach(item=> {
+                    resultsBox.innerHTML += `
+                        <a href="${item.url}" class="item_in_search">
+                            <div class="item_box_search">
+                                <div class="item_img_box_search">
+                                    <img src="${item.image}" class='item_img_search'>
+                                </div>
+                                <div class="item_name_box_search">
+                                    <h5 class="name_item_search">${item.name}</h5>
+                                </div>
+                            </div>
+                        </a>
+                    `
+                })
+            }
+        },
+        error: (err)=> {
+            console.log(err)
+        }
+    })
+}
+
 
 searchInput.addEventListener('keyup', e=> {
     console.log(e.target.value)
@@ -57,11 +113,23 @@ searchInput.addEventListener('keyup', e=> {
         resultsBox.classList.remove('not-visible')
     }
 
-    sendSearchData(e.target.value)
+    if (searchInput.value && (e.key === 'Enter' || e.keyCode === 13)) {
+        searchPage(e.target.value)
+    }
+    else {
+        sendSearchData(e.target.value)
+    }
 })
 
 window.addEventListener('click', e=> {
     if (!($('#search_input').is(":focus"))) {
         resultsBox.classList.add('not-visible')
+    }
+    if ($('#search_input').is(":focus") && !searchInput.value) {
+        resultsBox.classList.remove('not-visible')
+        showData()
+    }
+    else if ($('#search_input').is(":focus")) {
+        resultsBox.classList.remove('not-visible')
     }
 })

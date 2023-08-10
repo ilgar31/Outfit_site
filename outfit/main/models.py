@@ -143,3 +143,12 @@ class Watched(models.Model):
 
     def __str__(self):
         return f'{self.profile}->{self.item_id}'
+
+
+# class Search_history(models.Model):
+#     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="watched")
+#     item_id = models.IntegerField("Товар", blank=True)
+#
+#     def __str__(self):
+#         return f'{self.profile}->{self.item_id}'
+#
