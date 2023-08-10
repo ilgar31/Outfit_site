@@ -79,25 +79,38 @@ const showData = () => {
             'type': 'data',
         },
         success: (res)=> {
-            console.log(res.items)
-            const data = res.items
-            if (Array.isArray(data)) {
-                resultsBox.innerHTML = ''
-                data.forEach(item=> {
+            resultsBox.innerHTML = ''
+            if (res.history.length) {
+                resultsBox.innerHTML += `
+                    <p class='search_title'>Недавние поисковые запросы</p>
+                `
+                res.history.forEach(text=> {
+                    var url_text = '/goods/' + text;
                     resultsBox.innerHTML += `
-                        <a href="${item.url}" class="item_in_search">
-                            <div class="item_box_search">
-                                <div class="item_img_box_search">
-                                    <img src="${item.image}" class='item_img_search'>
-                                </div>
-                                <div class="item_name_box_search">
-                                    <h5 class="name_item_search">${item.name}</h5>
-                                </div>
-                            </div>
+                        <a href=${url_text} class="history_object">
+                            <p>${text}</p>
                         </a>
                     `
                 })
             }
+            resultsBox.innerHTML += `
+                <p class='search_title'>Подборки для Вас</p>
+            `
+            res.items_for_you.forEach(item=> {
+                resultsBox.innerHTML += `
+                    <a href="${item.url}" class="item_in_search">
+                        <div class="item_box_search">
+                            <div class="item_img_box_search">
+                                <img src="${item.image}" class='item_img_search'>
+                            </div>
+                        </div>
+                    </a>
+                `
+            })
+
+            resultsBox.innerHTML += `
+                <p class='search_title'>Часто просматриваемое</p>
+            `
         },
         error: (err)=> {
             console.log(err)

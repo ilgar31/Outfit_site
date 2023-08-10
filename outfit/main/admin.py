@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Profile, Items, Item_images, Favorites, Item_sizes, Basket, Purchase, Items_purchase, Watched
+from .models import Profile, Items, Item_images, Favorites, Item_sizes, Basket, Purchase, Items_purchase, Watched, Search_history
 
 admin.site.register(Favorites)
 admin.site.register(Basket)
@@ -24,6 +24,11 @@ class WatchedInline(admin.TabularInline):
     model = Watched
 
 
+class Search_historyInline(admin.TabularInline):
+    fk_name = 'profile'
+    model = Search_history
+
+
 @admin.register(Purchase)
 class PurchaseAdmin(admin.ModelAdmin):
     inlines = [Items_purchaseInline, ]
@@ -36,4 +41,4 @@ class ItemsAdmin(admin.ModelAdmin):
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    inlines = [WatchedInline, ]
+    inlines = [WatchedInline, Search_historyInline, ]

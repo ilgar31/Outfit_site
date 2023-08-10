@@ -9,7 +9,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
 from .token import account_activation_token
 from django.forms import TextInput
-from .models import Items, Favorites, Basket, Profile, Purchase, Items_purchase, Watched
+from .models import Items, Favorites, Basket, Profile, Purchase, Items_purchase, Watched, Search_history
 from django.http import JsonResponse, HttpResponseNotFound
 from django.contrib.auth.models import User
 import json
@@ -169,8 +169,8 @@ def product_page(request, pk):
             watched_items = watched_items[1:]
 
         watched_items = list(map(lambda x: Items.objects.get(id=x.item_id), watched_items))[::-1]
-        if len(Watched.objects.filter(item_id=pk)) == 1:
-            Watched.objects.get(item_id=pk).delete()
+        if len(Watched.objects.filter(profile=request.user.profile, item_id=pk)) == 1:
+            Watched.objects.get(profile=request.user.profile, item_id=pk).delete()
         watched = Watched()
         watched.profile = request.user.profile
         watched.item_id = pk
@@ -265,18 +265,41 @@ def search_results(request):
                 res = "Товары не найдены"
             return JsonResponse({"item": res})
         else:
+            # Подборки для Вас
             items = Items.objects.all()
             data = []
             for i in items:
                 element = {
                     'pk': i.pk,
-                    'name': i.name,
                     'image': '/static/' + str(i.images.all()[0]),
                     'url': "/product/" + str(i.pk)
                 }
                 data.append(element)
             random.shuffle(data)
-            return JsonResponse({"items": data[:5]})
+            #-----------------------------
+
+            # Недавние происковые запросы
+            if request.user.is_authenticated:
+                searches = request.user.profile.history.all()[::-1]
+                history = []
+                for i in searches:
+                    history.append(i.text)
+            #---------------------------------------------
+
+            # Часто просматриваемое
+            best_items = []
+            item_watched = dict()
+            for user in User.objects.all():
+                for i in user.profile.watched.all():
+                    if item_watched.get(i.item_id) is None:
+                        item_watched[i.item_id] = 1
+                    else:
+                        item_watched[i.item_id] += 1
+
+
+            #---------------------------------------------
+
+            return JsonResponse({"items_for_you": data[:5], "history": history})
     return JsonResponse({})
 
 
@@ -293,8 +316,21 @@ def search_page(request):
 
 
 def search_goods(request, text):
-    # if request.user.is_authenticated:
-    #     request.user.profile.
+    if request.user.is_authenticated:
+
+        searches = Search_history.objects.filter(profile=request.user.profile)
+        if len(searches) == 7:
+            searches[0].delete()
+            searches = searches[1:]
+
+        if len(Search_history.objects.filter(profile=request.user.profile, text=text)) == 1:
+            Search_history.objects.get(profile=request.user.profile, text=text).delete()
+
+        new_search = Search_history()
+        new_search.profile = request.user.profile
+        new_search.text = text
+        new_search.save()
+
     items = Items.objects.filter(name__icontains=text)
     return render(request, "main/search_goods.html", {"items": items, "text": text, "count": len(items)})
 
