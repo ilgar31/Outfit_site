@@ -19,16 +19,13 @@ const sendSearchData = (item) => {
             const data = res.item
             if (Array.isArray(data)) {
                 resultsBox.innerHTML = ''
-                data.forEach(item=> {
+                data.forEach(text=> {
+                    var url_text = '/goods/' + text.replaceAll(" ", "%20");;
                     resultsBox.innerHTML += `
-                        <a href="${item.url}" class="item_in_search">
+                        <a href=${url_text} class="item_in_search">
                             <div class="item_box_search">
-                                <div class="item_img_box_search">
-                                    <img src="${item.image}" class='item_img_search'>
-                                </div>
-                                <div class="item_name_box_search">
-                                    <h5 class="name_item_search">${item.name}</h5>
-                                </div>
+                                <img src="${res.lupa}" class='item_img_search'>
+                                <h5 class="name_item_search">${text}</h5>
                             </div>
                         </a>
                     `

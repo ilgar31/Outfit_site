@@ -251,19 +251,14 @@ def search_results(request):
             # for i in range(len(users)):
             #     search_users.append(users[i].user.username)
             if len(search_items) > 0 and len(item.replace(" ", '')) > 0:
-                data = []
+                name_items = []
                 for i in search_items:
-                    element = {
-                        'pk': i.pk,
-                        'name': i.name,
-                        'image': '/static/' + str(i.images.all()[0]),
-                        'url': "/product/" + str(i.pk)
-                    }
-                    data.append(element)
-                res = data
+                    if i.name not in name_items:
+                        name_items.append(i.name)
+                res = name_items
             else:
                 res = "Товары не найдены"
-            return JsonResponse({"item": res})
+            return JsonResponse({"item": res, 'lupa': '/static/main/png/lupa.png'})
         else:
             # Подборки для Вас
             items = Items.objects.all()
