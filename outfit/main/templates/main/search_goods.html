@@ -13,7 +13,7 @@
 {% block content %}
 
 <div class="items_box">
-    <p class="search_text">По запросу <strong>{{ text }}</strong> найдено {{ count }} товаров</p>
+    <p class="search_text">По запросу <strong>{{ text }}</strong> {{ word1 }} {{ count }} {{ word2 }}</p>
     <items>
         {% for i in items %}
         <a href="{% url 'product_page' i.id %}" class="item_box">

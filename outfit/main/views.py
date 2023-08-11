@@ -344,7 +344,16 @@ def search_goods(request, text):
         new_search.save()
 
     items = Items.objects.filter(name__icontains=text)
-    return render(request, "main/search_goods.html", {"items": items, "text": text, "count": len(items)})
+    if len(items) == 1:
+        word1 = "найден"
+        word2 = "товар"
+    elif len(items) % 10 in [2, 3, 4] and len(items) % 100 not in [12, 13, 14]:
+        word1 = "найдено"
+        word2 = "товара"
+    else:
+        word1 = "найдено"
+        word2 = "товаров"
+    return render(request, "main/search_goods.html", {"items": items, "text": text, "count": len(items), "word1": word1, "word2": word2})
 
 
 def basket(request):

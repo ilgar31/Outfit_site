@@ -278,9 +278,9 @@ d {
 
 .item_for_you{
     display: inline-block;
-    width: 250px;
-    height: 250px;
-    line-height: 250px;
+    width: 230px;
+    height: 230px;
+    line-height: 230px;
     margin-left: 15px;
 }
 
